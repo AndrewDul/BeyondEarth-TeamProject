@@ -1,0 +1,16 @@
+H:\Desktop\Prac66\Testing3\obj\Debug\Testing3.csproj.AssemblyReference.cache
+H:\Desktop\Prac66\Testing3\obj\Debug\Testing3.csproj.CoreCompileInputs.cache
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Testing3.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Testing3.pdb
+H:\Desktop\Prac66\Testing3\bin\Debug\ClassLibrary.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+H:\Desktop\Prac66\Testing3\bin\Debug\ClassLibrary.pdb
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+H:\Desktop\Prac66\Testing3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+H:\Desktop\Prac66\Testing3\obj\Debug\Testing3.csproj.Up2Date
+H:\Desktop\Prac66\Testing3\obj\Debug\Testing3.dll
+H:\Desktop\Prac66\Testing3\obj\Debug\Testing3.pdb
