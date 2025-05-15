@@ -10,3 +10,9 @@ H:\Desktop\Prac66\ClassLibrary\obj\Debug\ClassLibrary.csproj.AssemblyReference.c
 H:\Desktop\Prac66\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
 H:\Desktop\Prac66\ClassLibrary\obj\Debug\ClassLibrary.dll
 H:\Desktop\Prac66\ClassLibrary\obj\Debug\ClassLibrary.pdb
+H:\Desktop\TeamProj1505\ClassLibrary\bin\Debug\ClassLibrary.dll
+H:\Desktop\TeamProj1505\ClassLibrary\bin\Debug\ClassLibrary.pdb
+H:\Desktop\TeamProj1505\ClassLibrary\obj\Debug\ClassLibrary.csproj.AssemblyReference.cache
+H:\Desktop\TeamProj1505\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+H:\Desktop\TeamProj1505\ClassLibrary\obj\Debug\ClassLibrary.dll
+H:\Desktop\TeamProj1505\ClassLibrary\obj\Debug\ClassLibrary.pdb
