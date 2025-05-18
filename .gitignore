@@ -1,9 +1,15 @@
-.vs/
+# Ignore build results
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+
+# Ignore user-specific 
 *.user
 *.suo
-*.vsidx
-*.dbmdl
-*.log
-*.cache
-*.obj
-*.bin
+*.userosscache
+*.sln.docstates
+
+# VS folder
+.vs/
