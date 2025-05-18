@@ -1,4 +1,6 @@
 .vs/
+bin/
+obj/
 *.user
 *.suo
 *.vsidx
@@ -7,3 +9,5 @@
 *.cache
 *.obj
 *.bin
+*.pdb
+*.dll
