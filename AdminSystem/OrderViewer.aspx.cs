@@ -14,9 +14,15 @@ public partial class _1Viewer : System.Web.UI.Page
        clsOrder AnOrder = new clsOrder();
 
         //get the data from the session object
-        AnOrder = (clsOrder)Session["Anorder"];
+        AnOrder = (clsOrder)Session["AnOrder"];
 
         // Display the Order Status for this entry
-        Response.Write(AnOrder.OrderStatus);
+        Response.Write("Order ID: " + AnOrder.OrderID + "<br />");
+        Response.Write("Customer ID: " + AnOrder.CustomerID + "<br />");
+        Response.Write("Product ID: " + AnOrder.ProductID + "<br />");
+        Response.Write("Order Date: " + AnOrder.OrderDate.ToShortDateString() + "<br />");
+        Response.Write("Total Price: £" + AnOrder.TotalPrice + "<br />");
+        Response.Write("Order Status: " + AnOrder.OrderStatus + "<br />");
+        Response.Write("Is Cancelled: " + AnOrder.IsCancelled + "<br />");
     }
 }

@@ -23,9 +23,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
 
-        //capture orderStatus
+        //capture orderStatus and rest of values
         AnOrder.OrderStatus= txtOrderStatus.Text;
-
+        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
+        AnOrder.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+        AnOrder.ProductID = Convert.ToInt32(txtProductID.Text);
+        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+        AnOrder.TotalPrice = Convert.ToInt32(txtTotalPrice.Text);
+        AnOrder.IsCancelled = chkIsCancelled.Checked;
         //store the orders in the session object
         Session["AnOrder"] = AnOrder;
 
