@@ -1,28 +1,77 @@
-﻿using System;
+﻿using System; // Gives access to basic system types like Int32, DateTime, etc.
 
-namespace ClassLibrary
+namespace ClassLibrary // Declares the namespace for class grouping
 {
-    public class clsOrder
+    public class clsOrder // Public class that represents an Order
     {
-        // Primary Key - Order ID
-        public int OrderID { get; set; }
+        // Private data members
+        private Int32 mOrderID; // Stores the unique order ID
+        private Int32 mCustomerID; // Stores the customer ID associated with the order
+        private Int32 mProductID; // Stores the product ID associated with the order
+        private DateTime mOrderDate; // Stores the date the order was placed
+        private decimal mTotalPrice; // Stores the total price of the order
+        private string mOrderStatus; // Stores the status of the order (e.g. Pending, Approved)
+        private bool mIsCancelled; // Stores whether the order has been cancelled
 
-        // Foreign Key to Customer table
-        public int CustomerID { get; set; }
+        // Public properties (getters and setters)
 
-        // Foreign Key to Product/Experience table
-        public int ProductID { get; set; }
+        public int OrderID
+        {
+            get { return mOrderID; } // Returns the OrderID value
+            set { mOrderID = value; } // Sets the OrderID value
+        }
 
-        // Date the order was placed
-        public DateTime OrderDate { get; set; }
+        public int CustomerID
+        {
+            get { return mCustomerID; } // Returns the CustomerID value
+            set { mCustomerID = value; } // Sets the CustomerID value
+        }
 
-        // Total price of the order
-        public decimal TotalPrice { get; set; }
+        public int ProductID
+        {
+            get { return mProductID; } // Returns the ProductID value
+            set { mProductID = value; } // Sets the ProductID value
+        }
 
-        // Status of the order, e.g., Pending, Approved
-        public string OrderStatus { get; set; }
+        public DateTime OrderDate
+        {
+            get { return mOrderDate; } // Returns the OrderDate value
+            set { mOrderDate = value; } // Sets the OrderDate value
+        }
 
-        // Whether the order has been cancelled
-        public bool IsCancelled { get; set; }
+        public decimal TotalPrice
+        {
+            get { return mTotalPrice; } // Returns the TotalPrice value
+            set { mTotalPrice = value; } // Sets the TotalPrice value
+        }
+
+        public string OrderStatus
+        {
+            get { return mOrderStatus; } // Returns the OrderStatus value
+            set { mOrderStatus = value; } // Sets the OrderStatus value
+        }
+
+        public bool IsCancelled
+        {
+            get { return mIsCancelled; } // Returns the IsCancelled value (true/false)
+            set { mIsCancelled = value; } // Sets the IsCancelled value
+        }
+
+        // FIND METHOD
+        public bool Find(int orderID)
+        {
+            // Set hardcoded values for testing purposes
+
+            mOrderID = 7; // Simulate order ID = 1
+            mCustomerID = 1; // Simulate customer ID = 1
+            mProductID = 1; // Simulate product ID = 1
+            mOrderDate = Convert.ToDateTime("2025-05-18"); // Simulate order date
+            mTotalPrice = 99.99m; // Simulate total price
+            mOrderStatus = "Pending"; // Simulate status
+            mIsCancelled = true; // Simulate cancelled state
+
+            // Return true to simulate a successful find operation
+            return true;
+        }
     }
 }

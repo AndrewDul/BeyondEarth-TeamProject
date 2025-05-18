@@ -78,6 +78,142 @@ namespace Testing1
             AnOrder.IsCancelled = TestData;
             Assert.AreEqual(AnOrder.IsCancelled, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //boolean variable to store the result
+            Boolean Found = false;
+            //create some test data to use with the method
+            Int32 OrderID = 1;
+            //invoke the method
+            Found = AnOrder.Find(OrderID);
+            //test to see that the result is correct
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestOrderIdFound()
+        {
+            // create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+
+            // create a Boolean variable to store the result of the search
+            Boolean Found = false;
+
+            // create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+
+            // create some test data to use with the method
+            Int32 OrderID = 7;
+
+            // invoke the method
+            Found = AnOrder.Find(OrderID);
+
+            // check the OrderID property
+            if (AnOrder.OrderID != 7)
+            {
+                OK = false;
+            }
+
+            // test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestCustomerIDFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.CustomerID != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestProductIDFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.ProductID != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestOrderDateFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.OrderDate != Convert.ToDateTime("2025-05-18"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTotalPriceFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.TotalPrice != 99.99m)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestOrderStatusFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.OrderStatus != "Pending")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsCancelledFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            bool Found = false;
+            bool OK = true;
+            int OrderID = 1;
+            Found = AnOrder.Find(OrderID);
+            if (AnOrder.IsCancelled != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+
+
     }
 
 }
