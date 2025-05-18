@@ -16,7 +16,7 @@ public partial class _1Viewer : System.Web.UI.Page
         //get the data from the session object
         AnOrder = (clsOrder)Session["AnOrder"];
 
-        // Display the Order Status for this entry
+        // Display the Order Status for this entry:
         Response.Write("Order ID: " + AnOrder.OrderID + "<br />");
         Response.Write("Customer ID: " + AnOrder.CustomerID + "<br />");
         Response.Write("Product ID: " + AnOrder.ProductID + "<br />");
