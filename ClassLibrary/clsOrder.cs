@@ -73,5 +73,10 @@ namespace ClassLibrary // Declares the namespace for class grouping
             // Return true to simulate a successful find operation
             return true;
         }
+
+        public string Valid(int v1, int v2, int v3, DateTime date, decimal v4, string v5)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
