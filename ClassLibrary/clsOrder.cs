@@ -74,9 +74,94 @@ namespace ClassLibrary // Declares the namespace for class grouping
             return true;
         }
 
-        public string Valid(string v1, string v2, string v3, string date, string v4, string v5)
+        // Valid METHOD
+        public string Valid(string customerID, string productID, string orderDate, string totalPrice, string orderStatus)
         {
-            return "";
+            string Error = "";
+
+            // === CustomerID ===
+            try
+            {
+                int custID = Convert.ToInt32(customerID);
+                if (custID <= 0)
+                {
+                    Error += "Customer ID must be greater than zero: ";
+                }
+                if (custID > 999999)
+                {
+                    Error += "Customer ID must not exceed 999999: ";
+                }
+            }
+            catch
+            {
+                Error += "Customer ID is not a valid integer: ";
+            }
+
+
+            // === ProductID ===
+            try
+            {
+                int prodID = Convert.ToInt32(productID);
+                if (prodID <= 0)
+                {
+                    Error += "Product ID must be greater than zero: ";
+                }
+                if (prodID > 999999)
+                {
+                    Error += "Product ID must not exceed 999999: ";
+                }
+            }
+            catch
+            {
+                Error += "Product ID is not a valid integer: ";
+            }
+
+
+            // === OrderDate ===
+            DateTime DateTemp;
+            try
+            {
+                DateTemp = Convert.ToDateTime(orderDate);
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error += "Order Date cannot be in the future: ";
+                }
+            }
+            catch
+            {
+                Error += "Order Date is not a valid date: ";
+            }
+
+            // === TotalPrice ===
+            try
+            {
+                decimal price = Convert.ToDecimal(totalPrice);
+                if (price < 0)
+                {
+                    Error += "Total Price cannot be negative: ";
+                }
+                if (price > 10000)
+                {
+                    Error += "Total Price exceeds the maximum allowed: ";
+                }
+            }
+            catch
+            {
+                Error += "Total Price is not a valid number: ";
+            }
+
+            // === OrderStatus ===
+            if (orderStatus.Length == 0)
+            {
+                Error += "Order Status may not be blank: ";
+            }
+            if (orderStatus.Length > 20)
+            {
+                Error += "Order Status must be less than or equal to 20 characters: ";
+            }
+
+            return Error;
         }
+
     }
 }
