@@ -8,6 +8,8 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    public object AnManagment { get; private set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -19,7 +21,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsManagment AnManagment = new clsManagment();
 
 
-        //capture the FirstName
+        //capture the FirstName and other entries
 
         AnManagment.CustomerId = Convert.ToInt32(txtCustomerId.Text);
         AnManagment.FirstName = (txtFirstNameId.Text);
@@ -39,4 +41,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //navigate to the view page
         Response.Redirect("3Viewer.aspx");
     }
+
+    
+
+
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+        clsManagment AnManagment = new clsManagment();
+
+        Int32 CustomerId;
+
+        Boolean Found = false;
+
+        CustomerId = Convert.ToInt32(txtCustomerId.Text);
+
+        Found = AnManagment.Find(CustomerId);
+
+        if (Found == true)
+        {
+            txtFirstNameId.Text = AnManagment.FirstName;
+            txtLastNameid.Text = AnManagment.LastName;
+            txtEmailAddressId.Text = AnManagment.EmailAddress;
+            txtPhoneNumber.Text = AnManagment.PhoneNumber;
+            txtPostCode.Text = AnManagment.PostCode;
+            txtDateAddedId.Text = AnManagment.DateAdded.ToString();
+            chkActive.Checked = AnManagment.Active;
+        }
+    }
+
+    protected void txtCustomerId_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    
 }

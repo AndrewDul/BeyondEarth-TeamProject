@@ -15,7 +15,7 @@ namespace Testing3
             //create a Boolean variable to store reults of the validation
             Boolean Found =false;
             //create some test data to use with the method
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             //Invoke the method
             Found = AnManagment.Find(CustomerId);
             //test to see if the result is true

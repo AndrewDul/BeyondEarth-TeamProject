@@ -63,7 +63,7 @@ namespace Testing3
             //create an instance of the class we want to create
             clsManagment AnManagement = new clsManagment();
             //create some test data
-            string TestData = "Amer";
+            string TestData = "Will";
             //assign the data to the property
             AnManagement.FirstName = TestData;
             //test to see that the two values are the same
@@ -77,7 +77,7 @@ namespace Testing3
             //create an instance of the class we want to create
             clsManagment AnManagement = new clsManagment();
             //create some test data
-            string TestData = "Bamazrua";
+            string TestData = "Mike";
             //assign the data to the property
             AnManagement.LastName = TestData;
             //test to see that the two values are the same
@@ -136,7 +136,7 @@ namespace Testing3
                 //create a Boolean variable to store reults of the validation
                 Boolean Found = false;
                 //create some test data to use with the method
-                Int32 CustomerId = 21;
+                Int32 CustomerId = 10;
                 //Invoke the method
                 Found = AnManagment.Find(CustomerId);
                 //test to see if the result is true
@@ -146,7 +146,7 @@ namespace Testing3
 
 
         [TestMethod]
-        public void TestCustomerIdFound()
+        public void TestCustomerIdProprtyFound()
         {
             //Crete an instance of class we ant to create
             clsManagment AnManagment = new clsManagment();
@@ -155,11 +155,11 @@ namespace Testing3
             //create a boolean variable to record if data is OK
             Boolean OK = true;
             // create some test data to use with method
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             //Invoke the method
             Found = AnManagment.Find(CustomerId);
             //check the address ID
-            if (AnManagment.CustomerId != 21)
+            if (AnManagment.CustomerId != 10)
             {
                 OK = false;
             }
@@ -178,11 +178,11 @@ namespace Testing3
             //create a boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             //invoke the method
             Found = AnManagement.Find(CustomerId);
             //check the dateAdded property
-            if (AnManagement.DateAdded != Convert.ToDateTime("23/12/2022"))
+            if (AnManagement.DateAdded != Convert.ToDateTime("15/05/2025"))
             {
                 OK = false;
             }
@@ -196,9 +196,9 @@ namespace Testing3
             clsManagment AnManagement = new clsManagment();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             Found = AnManagement.Find(CustomerId);
-            if (AnManagement.FirstName != "Amer")
+            if (AnManagement.FirstName != "Will")
             {
                 OK = false;
             }
@@ -211,9 +211,9 @@ namespace Testing3
             clsManagment AnManagement = new clsManagment();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             Found = AnManagement.Find(CustomerId);
-            if (AnManagement.LastName != "Bamazrua")
+            if (AnManagement.LastName != "Mike")
             {
                 OK = false;
             }
@@ -226,9 +226,9 @@ namespace Testing3
             clsManagment AnManagement = new clsManagment();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             Found = AnManagement.Find(CustomerId);
-            if (AnManagement.EmailAddress != "john.doe@example.com")
+            if (AnManagement.EmailAddress != "Mike@gmail.com")
             {
                 OK = false;
             }
@@ -241,9 +241,9 @@ namespace Testing3
             clsManagment AnManagement = new clsManagment();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             Found = AnManagement.Find(CustomerId);
-            if (AnManagement.PostCode != "LE1 1AA")
+            if (AnManagement.PostCode != "NG1 7TW")
             {
                 OK = false;
             }
@@ -256,9 +256,9 @@ namespace Testing3
             clsManagment AnManagement = new clsManagment();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             Found = AnManagement.Find(CustomerId);
-            if (AnManagement.PhoneNumber != "0116 123 4567")
+            if (AnManagement.PhoneNumber != "0004")
             {
                 OK = false;
             }
