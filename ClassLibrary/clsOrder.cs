@@ -118,11 +118,23 @@ namespace ClassLibrary // Declares the namespace for class grouping
 
 
             // === OrderDate ===
-            DateTime DateTemp;
             try
             {
-                DateTemp = Convert.ToDateTime(orderDate);
-                if (DateTemp > DateTime.Now.Date)
+                DateTime DateTemp = Convert.ToDateTime(orderDate);
+                DateTime Today = DateTime.Now.Date;
+
+                // Optional: strict boundary e.g. no earlier than 01/01/2000
+                DateTime MinDate = new DateTime(2000, 1, 1);
+                if (DateTemp < MinDate)
+                {
+                    Error += "Order Date cannot be earlier than 01/01/2000: ";
+                }
+
+                if (DateTemp < Today)
+                {
+                    Error += "Order Date cannot be in the past: ";
+                }
+                if (DateTemp > Today)
                 {
                     Error += "Order Date cannot be in the future: ";
                 }
@@ -131,7 +143,6 @@ namespace ClassLibrary // Declares the namespace for class grouping
             {
                 Error += "Order Date is not a valid date: ";
             }
-
             // === TotalPrice ===
             try
             {

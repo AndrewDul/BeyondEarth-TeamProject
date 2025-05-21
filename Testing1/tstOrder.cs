@@ -9,13 +9,13 @@ namespace Testing1
     {
         //good test data
         //create some test data to pass the valid method
-        string OrderID ="1";
+        string OrderID = "1";
         string CustomerID = "2";
         string ProductID = "3";
         string OrderDate = DateTime.Now.ToShortDateString();
         string TotalPrice = "99.99";
         string OrderStatus = "Pending";
-       // bool IsCancelled = true;
+        // bool IsCancelled = true;
 
 
         [TestMethod]
@@ -235,7 +235,7 @@ namespace Testing1
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
-        
+
         /// <summary>
         /// Customer ID
         /// </summary>
@@ -272,7 +272,7 @@ namespace Testing1
             clsOrder anOrder = new clsOrder();
             string error;
             string customerID = "1"; // valid minimum value
-            
+
 
             // Act
             error = anOrder.Valid(customerID, ProductID, OrderDate, TotalPrice, OrderStatus);
@@ -280,7 +280,7 @@ namespace Testing1
             // Assert
             Assert.AreEqual("", error);
         }
-       
+
         [TestMethod]
         public void CustomerIDMinPlusOne()
         {
@@ -571,6 +571,21 @@ namespace Testing1
             // Assert
             Assert.AreNotEqual("", error);
         }
+        [TestMethod]
+        public void OrderDateMid()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            DateTime testDate = DateTime.Now.Date; // mid = today (logical midpoint)
+            string orderDate = testDate.ToString();
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, orderDate, TotalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
 
         [TestMethod]
         public void OrderDateExtremeMax()
@@ -618,6 +633,21 @@ namespace Testing1
             // Assert
             Assert.AreNotEqual("", error);
         }
+        [TestMethod]
+        public void OrderDateMaxLessOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            DateTime testDate = DateTime.Now.Date.AddDays(-1); // yesterday = just below max
+            string orderDate = testDate.ToString();
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, orderDate, TotalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
 
         [TestMethod]
         public void OrderDateInvalidDataType()
@@ -634,6 +664,301 @@ namespace Testing1
             Assert.AreNotEqual("", error);
         }
 
+        ///// Total Price//////
+        ///
+
+        [TestMethod]
+        public void TotalPriceExtremeMin()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "-1000000"; // extreme negative value, invalid
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+
+        [TestMethod]
+        public void TotalPriceMinLessOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "-1"; // just below the minimum allowed (0)
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+
+        [TestMethod]
+        public void TotalPriceMin()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "0"; // minimum allowed value
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+
+        [TestMethod]
+        public void TotalPriceMinPlusOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "1"; // just above minimum
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceMaxLessOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "9999"; // just below the maximum allowed
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceMax()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "10000"; // maximum allowed value
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceMaxPlusOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "10001"; // just above the allowed maximum
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceMid()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "5000"; // mid-range valid value
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceExtremeMax()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "1000000"; // extreme high value, invalid
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+        [TestMethod]
+        public void TotalPriceInvalidDataType()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string totalPrice = "ten pounds"; // invalid, non-numeric input
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, totalPrice, OrderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+
+
+        /// <summary>
+        /// /Order Status
+        /// </summary>
+        /// 
+
+
+        [TestMethod]
+        public void OrderStatusExtremeMin()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = ""; // empty string, invalid
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+
+        [TestMethod]
+        public void OrderStatusMinLessOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = ""; // zero characters, invalid (less than min)
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMin()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = "A"; // minimum valid length
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMinPlusOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = "AB"; // just above minimum length
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMaxLessOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = new string('A', 19); // 19 characters
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMax()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = new string('A', 20); // 20 characters
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMaxPlusOne()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = new string('A', 21); // 21 characters (too long)
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusMid()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = "Processing"; // 10 characters
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusExtremeMax()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = new string('A', 100); // 100 characters (extremely too long)
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreNotEqual("", error);
+        }
+        [TestMethod]
+        public void OrderStatusInvalidDataType()
+        {
+            // Arrange
+            clsOrder anOrder = new clsOrder();
+            string error;
+            string orderStatus = "@#$%^&*()"; // non-alphabetic, potentially invalid input
+
+            // Act
+            error = anOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, orderStatus);
+
+            // Assert
+            Assert.AreEqual("", error); // or AreNotEqual depending on your validation logic
+        }
 
     }
 
