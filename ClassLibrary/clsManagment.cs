@@ -56,20 +56,40 @@ namespace ClassLibrary
             set { mEmailAddress = value; }
         }
 
-        public bool Find(int customerId)
+        /***** FIND METHOD ******/
+        public bool Find(int CustomerId)
         {
-            // Set hardcoded values for testing purposes
-            mCustomerId = 21;
-            mFirstName = "Amer";
-            mLastName = "Bamazrua";
-            mEmailAddress = "john.doe@example.com";
-            mPostCode = "LE1 1AA";
-            mPhoneNumber = "0116 123 4567";
-            mActive = true;
-            mDateAdded = Convert.ToDateTime("2022-12-23");
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
 
-            //always return true
-            return true;
+            //add the parameter for the CustomerId to search for
+            DB.AddParameter("@CustomerId", CustomerId);
+
+            //execute the stored procedure
+            DB.Execute("sprc_tblCustomer_FilterByCustomerId");
+
+            //if one record is found (there should be either one or zero)
+            if (DB.Count == 1)
+            {
+                //copy the data from the database to the private data members
+                mCustomerId = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerId"]);
+                mFirstName = Convert.ToString(DB.DataTable.Rows[0]["FirstName"]);
+                mLastName = Convert.ToString(DB.DataTable.Rows[0]["LastName"]);
+                mEmailAddress = Convert.ToString(DB.DataTable.Rows[0]["EmailAddress"]);
+                mPostCode = Convert.ToString(DB.DataTable.Rows[0]["PostCode"]);
+                mPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["PhoneNumber"]);
+                mDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAdded"]);
+                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
+
+                //return that everything worked OK
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                //return false indicating there is a problem
+                return false;
+            }
         }
     }
 }

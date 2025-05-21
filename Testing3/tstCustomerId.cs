@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testing3
 {
     [TestClass]
-    public class TestCustomerId
+    public class tstCustomerId
     {
        
 
@@ -20,11 +20,11 @@ namespace Testing3
             //create a boolean variable to record if data is OK
             Boolean OK = true;
             // create some test data to use with method
-            Int32 CustomerId = 21;
+            Int32 CustomerId = 10;
             //Invoke the method
             Found = AnManagment.Find(CustomerId);
             //check the address ID
-            if (AnManagment.CustomerId != 21)
+            if (AnManagment.CustomerId != 10)
             {
                 OK = false;
             }
