@@ -20,21 +20,44 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        //create a new instance of clsOrder
+        // Create an instance of clsOrder
         clsOrder AnOrder = new clsOrder();
 
-        //capture orderStatus and rest of values
-        AnOrder.OrderStatus= txtOrderStatus.Text;
-        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
-        AnOrder.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-        AnOrder.ProductID = Convert.ToInt32(txtProductID.Text);
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-        AnOrder.TotalPrice = Convert.ToInt32(txtTotalPrice.Text);
-        AnOrder.IsCancelled = chkIsCancelled.Checked;
-        //store the orders in the session object
-        Session["AnOrder"] = AnOrder;
+        // Capture input values as strings
+        string OrderID = txtOrderID.Text;
+        string CustomerID = txtCustomerID.Text;
+        string ProductID = txtProductID.Text;
+        string OrderDate = txtOrderDate.Text;
+        string TotalPrice = txtTotalPrice.Text;
+        string OrderStatus = txtOrderStatus.Text;
 
-        //navigate to the view page
-        Response.Redirect("OrderViewer.aspx");
+        // Variable to store any error message
+        string Error = "";
+
+        // Validate the input
+        Error = AnOrder.Valid(CustomerID, ProductID, OrderDate, TotalPrice, OrderStatus);
+
+        if (Error == "")
+        {
+            // If no errors, assign values to the object
+            AnOrder.OrderID = Convert.ToInt32(OrderID);
+            AnOrder.CustomerID = Convert.ToInt32(CustomerID);
+            AnOrder.ProductID = Convert.ToInt32(ProductID);
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+            AnOrder.TotalPrice = Convert.ToDecimal(TotalPrice);
+            AnOrder.OrderStatus = OrderStatus;
+            AnOrder.IsCancelled = chkIsCancelled.Checked;
+
+            // Store the order in the session object
+            Session["AnOrder"] = AnOrder;
+
+            // Navigate to the viewer page
+            Response.Redirect("OrderViewer.aspx");
+        }
+        else
+        {
+            // Display the error message
+            lblError.Text = Error;
+        }
     }
 }
