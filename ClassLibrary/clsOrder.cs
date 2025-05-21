@@ -74,9 +74,9 @@ namespace ClassLibrary // Declares the namespace for class grouping
             return true;
         }
 
-        public string Valid(int v1, int v2, int v3, DateTime date, decimal v4, string v5)
+        public string Valid(string v1, string v2, string v3, string date, string v4, string v5)
         {
-            throw new NotImplementedException();
+            return "";
         }
     }
 }

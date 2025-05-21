@@ -9,11 +9,11 @@ namespace Testing1
     {
         //good test data
         //create some test data to pass the valid method
-        int OrderID = 1;
-        int CustomerID = 1;
-        int ProductID = 1;
+        string OrderID ="1";
+        string CustomerID = "2";
+        string ProductID = "3";
         string OrderDate = DateTime.Now.ToShortDateString();
-        decimal TotalPrice = 99.99m;
+        string TotalPrice = "99.99";
         string OrderStatus = "Pending";
        // bool IsCancelled = true;
 
