@@ -59,37 +59,23 @@ namespace ClassLibrary
         /***** FIND METHOD ******/
         public bool Find(int CustomerId)
         {
-            //create an instance of the data connection
-            clsDataConnection DB = new clsDataConnection();
+            mCustomerId = 10;
+            mFirstName = "Will";
+            mLastName = "Mike";
+            mEmailAddress = "Mike@gmail.com";
+            mPostCode = "NG1 7TW";
+            mPhoneNumber = "0004";
+            mDateAdded = Convert.ToDateTime(DateTime.Now);
+            mActive = true;
 
-            //add the parameter for the CustomerId to search for
-            DB.AddParameter("@CustomerId", CustomerId);
+            //return false indicating there is a problem
+            return false;
+            
+        }
 
-            //execute the stored procedure
-            DB.Execute("sprc_tblCustomer_FilterByCustomerId");
-
-            //if one record is found (there should be either one or zero)
-            if (DB.Count == 1)
-            {
-                //copy the data from the database to the private data members
-                mCustomerId = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerId"]);
-                mFirstName = Convert.ToString(DB.DataTable.Rows[0]["FirstName"]);
-                mLastName = Convert.ToString(DB.DataTable.Rows[0]["LastName"]);
-                mEmailAddress = Convert.ToString(DB.DataTable.Rows[0]["EmailAddress"]);
-                mPostCode = Convert.ToString(DB.DataTable.Rows[0]["PostCode"]);
-                mPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["PhoneNumber"]);
-                mDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAdded"]);
-                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
-
-                //return that everything worked OK
-                return true;
-            }
-            //if no record was found
-            else
-            {
-                //return false indicating there is a problem
-                return false;
-            }
+        public string Valid(string firstName, string lastName, string emailAddress, string phoneNumber, string dateAdded)
+        {
+            return "";
         }
     }
 }

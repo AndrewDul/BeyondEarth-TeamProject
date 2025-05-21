@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net.Mail;
 using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,6 +9,17 @@ namespace Testing3
     [TestClass]
     public class tstManagment
     {
+
+        //GOOD TEST DATA
+        string FirstName = "Will";
+        string LastName = "Mike";
+        string EmailAddress = "Will@gmail.com";
+        string PhoneNumber = "0004";
+        string DateAdded = DateTime.Now.ToShortDateString();
+
+
+
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -145,6 +158,26 @@ namespace Testing3
         }
 
 
+
+
+        [TestMethod]
+
+        public void ValidMethodOK()
+        {
+
+            //create an instance of the class we want to create
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+        }
+
+
+
+
+
         [TestMethod]
         public void TestCustomerIdProprtyFound()
         {
@@ -182,7 +215,7 @@ namespace Testing3
             //invoke the method
             Found = AnManagement.Find(CustomerId);
             //check the dateAdded property
-            if (AnManagement.DateAdded != Convert.ToDateTime("15/05/2025"))
+            if (AnManagement.DateAdded != Convert.ToDateTime(DateTime.Now))
             {
                 OK = false;
             }
