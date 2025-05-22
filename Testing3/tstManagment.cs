@@ -14,6 +14,7 @@ namespace Testing3
         string FirstName = "Will";
         string LastName = "Mike";
         string EmailAddress = "Will@gmail.com";
+        string PostCode = "NG1 7TW";
         string PhoneNumber = "0004";
         string DateAdded = DateTime.Now.ToShortDateString();
 
@@ -158,26 +159,6 @@ namespace Testing3
         }
 
 
-
-
-        [TestMethod]
-
-        public void ValidMethodOK()
-        {
-
-            //create an instance of the class we want to create
-            clsManagment AnManagment = new clsManagment();
-            String Error = "";
-
-            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PhoneNumber, DateAdded);
-
-            Assert.AreEqual(Error, "");
-        }
-
-
-
-
-
         [TestMethod]
         public void TestCustomerIdProprtyFound()
         {
@@ -300,6 +281,806 @@ namespace Testing3
 
 
 
+        [TestMethod]
+
+        public void ValidMethodOK()
+        {
+
+            //create an instance of the class we want to create
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+
+
+        [TestMethod]
+        public void FirstNameMinLessOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            string Error = "";
+
+            string FirstName = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+
+        public void FirstNameMin()
+        {
+            clsManagment AnManagment = new clsManagment();
+            string Error = "";
+            string FirstName = "W";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void FirstNamePlusOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            string FirstName = "ww";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void FirsNameMaxLessOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            string FirstName = "wwwwwwww";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void FirstNameMax()
+        {
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            string FirstName = "wwwwwwwww";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+
+        public void FirstNameMid()
+        {
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            string FirstName = "wwww";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void FirstNameMaxPlusOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+
+            string FirstName = "wwwwwwwwww";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        [TestMethod]
+        public void FirstNameExtremeMax()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string FirstName = "";
+            FirstName = FirstName.PadRight(1000, 'w');
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        //Last Name
+
+
+        [TestMethod]
+        public void LastNameMinLessOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void LastNameMin()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "m";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void LastNameMinPlusOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "mm";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void LastNameMaxLessOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "";
+            LastName = LastName.PadRight(49, 'm');
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void LastNameMax()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "";
+            LastName = LastName.PadRight(50, 'm');
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void LastNamePlusOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void LastNameMid()
+        {
+
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string LastName = "";
+            LastName = LastName.PadRight(25, 'm');
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void EmailAddressLessOne()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string EmailAddress = "";
+
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+
+            //Test
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmailAddressMin()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "w";
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void EmailAddressMinPlusOne()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "ww";
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void EmailAddressMaxLessOne()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "";
+            EmailAddress = EmailAddress.PadRight(49, 'w');
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMax()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "";
+            EmailAddress = EmailAddress.PadRight(50, 'w');
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void EmailAddressPlusOne()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "";
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void EmailAddressMid()
+        {
+            //creste an instance
+            clsManagment AnManagment = new clsManagment();
+
+            //String variable for error message
+            String Error = "";
+
+            string EmailAddress = "";
+            EmailAddress = EmailAddress.PadRight(25, 'w');
+
+            //Invoke the method
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to see result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+
+        [TestMethod]
+        public void PostCodeMinLessOne()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void PostCodeMid1()
+        {
+
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "N";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void PostCodeMinPlusOne1()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "NN";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void PostCodeMaxLess1()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "NNNNNNNN";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void PostCodeMax()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "NNNNNNNNN";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void PostCodeMaxPlus1()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "NNNNNNNNN";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void PostCodeMid()
+        {
+            //create an instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store any error message
+            String Error = "";
+
+            string PostCode = "NNNN";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test to check if correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PhoneNumberMinLess1()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+
+            string PhoneNumber = "";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void PhoneNumberMinimum()
+
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+
+            string PhoneNumber = "0";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void PhoneNumberMinimumPlus1()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+
+            string PhoneNumber = "00";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void PhoneNumberMaxLess1()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+            string PhoneNumber = "";
+            PhoneNumber = PhoneNumber.PadRight(19, '0');
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void PhoneNumberMaximum()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+            string PhoneNumber = "";
+            PhoneNumber = PhoneNumber.PadRight(20, '0');
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void PhoneNumberMaximumPlus1()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+            string PhoneNumber = "";
+            PhoneNumber = PhoneNumber.PadRight(21, '0');
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        [TestMethod]
+        public void PhoneNumberMidium()
+        {
+            //create instance of class we want to create
+            clsManagment AnManagment = new clsManagment();
+
+            //string variable to store errors message
+            String Error = "";
+            string PhoneNumber = "";
+            PhoneNumber = PhoneNumber.PadRight(10, '0');
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //Test
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void DateAddedExtremeMin()
+        {
+            // Arrange
+            clsManagment AnManagment = new clsManagment();
+            String Error = "";
+            DateTime TestDate;
+            DateTime testDate = DateTime.Now.Date.AddYears(-100); // 100 years ago
+            string DateAdded = testDate.ToString(); // convert to string for validation
+
+            // Act
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            // Assert
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+
+
+        [TestMethod]
+        public void DateAddedMinLess1()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            DateTime TestDate;
+
+            TestDate = DateTime.Now.Date;
+
+            TestDate = TestDate.AddDays(-1);
+
+            string DateAdded = TestDate.ToString();
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //teset to see errors message
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        [TestMethod]
+        public void DateAddedMin()
+        {
+
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            DateTime TestDate;
+
+            TestDate = DateTime.Now.Date;
+
+            string DateAdded = TestDate.ToString();
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //teset to see errors message
+            Assert.AreEqual(Error, "");
+
+        }
+
+
+        [TestMethod]
+        public void DateAddedMinPlus1()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            DateTime TestDate;
+
+            TestDate = DateTime.Now.Date;
+
+            TestDate = TestDate.AddDays(1);
+
+            string DateAdded = TestDate.ToString();
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //teset to see errors message
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        [TestMethod]
+        public void DateAddedExtremeMax()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            DateTime TestDate;
+
+            TestDate = DateTime.Now.Date;
+
+            TestDate = TestDate.AddYears(100);
+
+            string DateAdded = TestDate.ToString();
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //teset to see errors message
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void DateAddedInvalidData()
+        {
+            clsManagment AnManagment = new clsManagment();
+
+            String Error = "";
+
+            string DateAdded = "This is not a date!";
+
+            //Invoke
+            Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
+
+            //teset to see errors message
+            Assert.AreNotEqual(Error, "");
+        }
 
     }
 }
