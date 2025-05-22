@@ -1073,7 +1073,7 @@ namespace Testing3
 
             String Error = "";
 
-            string DateAdded = "This is not a date!";
+            string DateAdded = "This is not a date! ";
 
             //Invoke
             Error = AnManagment.Valid(FirstName, LastName, EmailAddress, PostCode, PhoneNumber, DateAdded);
