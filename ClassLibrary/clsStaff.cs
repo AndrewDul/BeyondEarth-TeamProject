@@ -15,15 +15,23 @@ namespace ClassLibrary
             private string _department;
             private DateTime _hireDate;
             private bool _isActive;
+        private string _position;
 
-            // Public properties (accessors)
-            public int StaffID
+        public clsStaff(string position)
+        {
+            _position = position;
+        }
+
+        // Public properties (accessors)
+        public int StaffID
             {
                 get { return _staffID; }
                 set { _staffID = value; }
             }
 
-            public string FullName
+        public object StaffId { get; set; }
+
+        public string FullName
             {
                 get { return _fullName; }
                 set { _fullName = value; }
@@ -53,8 +61,10 @@ namespace ClassLibrary
                 set { _isActive = value; }
             }
 
-            // Validation method
-            public string Valid(string fullName, string email, string department)
+        public string Position { get; set; }
+
+        // Validation method
+        public string Valid(string fullName, string email, string department)
             {
                 string error = "";
 
