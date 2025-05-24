@@ -98,7 +98,7 @@ namespace Testing1
             //boolean variable to store the result
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //test to see that the result is correct
@@ -139,7 +139,7 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
             if (AnOrder.CustomerID != 1)
             {
@@ -154,9 +154,9 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
-            if (AnOrder.ProductID != 1)
+            if (AnOrder.ProductID != 2)
             {
                 OK = false;
             }
@@ -169,9 +169,9 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
-            if (AnOrder.OrderDate != Convert.ToDateTime("2025-05-18"))
+            if (AnOrder.OrderDate != Convert.ToDateTime("2001-05-05"))
             {
                 OK = false;
             }
@@ -184,9 +184,9 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
-            if (AnOrder.TotalPrice != 99.99m)
+            if (AnOrder.TotalPrice != 45m)
             {
                 OK = false;
             }
@@ -199,9 +199,9 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
-            if (AnOrder.OrderStatus != "Pending")
+            if (AnOrder.OrderStatus != "Confirmed")
             {
                 OK = false;
             }
@@ -214,9 +214,9 @@ namespace Testing1
             clsOrder AnOrder = new clsOrder();
             bool Found = false;
             bool OK = true;
-            int OrderID = 1;
+            int OrderID = 2;
             Found = AnOrder.Find(OrderID);
-            if (AnOrder.IsCancelled != true)
+            if (AnOrder.IsCancelled != false)
             {
                 OK = false;
             }

@@ -5,7 +5,13 @@ namespace ClassLibrary
 {
     public class clsOrderCollection
     {
+        // Private data member to hold the list of orders
         private List<clsOrder> mOrderList = new List<clsOrder>();
+        //private data member for thisOrder
+        clsOrder mThisOrder = new clsOrder();
+
+
+
 
         // Constructor// Constructor for the class
         public clsOrderCollection()
@@ -63,8 +69,21 @@ namespace ClassLibrary
             set { }
         }
 
-        public clsOrder ThisOrder { get; set; }
+        public clsOrder ThisOrder 
+        { 
+            get { return mThisOrder; }
 
+            set { mThisOrder = value; }
 
+        }
+
+        public int Add()
+        {
+            //add a record to the database based on the values of thisOrder
+            //set the primary key of the new record
+            mThisOrder.OrderID = 2;
+            //rerturn the primary key of the new record
+            return mThisOrder.OrderID;
+        }
     }
 }
