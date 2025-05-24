@@ -68,3 +68,17 @@ H:\Desktop\AmerPrac9b\Testing2\obj\Debug\Testing2.csproj.CoreCompileInputs.cache
 H:\Desktop\AmerPrac9b\Testing2\obj\Debug\Testing2.csproj.Up2Date
 H:\Desktop\AmerPrac9b\Testing2\obj\Debug\Testing2.dll
 H:\Desktop\AmerPrac9b\Testing2\obj\Debug\Testing2.pdb
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Testing2.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Testing2.pdb
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+H:\Desktop\YasserStaff5\Testing2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+H:\Desktop\YasserStaff5\Testing2\obj\Debug\Testing2.csproj.AssemblyReference.cache
+H:\Desktop\YasserStaff5\Testing2\obj\Debug\Testing2.csproj.CoreCompileInputs.cache
+H:\Desktop\YasserStaff5\Testing2\obj\Debug\Testing2.csproj.Up2Date
+H:\Desktop\YasserStaff5\Testing2\obj\Debug\Testing2.dll
+H:\Desktop\YasserStaff5\Testing2\obj\Debug\Testing2.pdb

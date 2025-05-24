@@ -10,16 +10,16 @@ namespace ClassLibrary
         {
             // Private fields
             private int _staffID;
-            private string _fullName;
-            private string _email;
-            private string _department;
-            private DateTime _hireDate;
-            private bool _isActive;
-        private string _position;
+            private string _FullName;
+            private string _Email;
+            private string _Department;
+            private DateTime _HireDate;
+            private bool _IsActive;
+        private string _Position;
 
         public clsStaff(string position)
         {
-            _position = position;
+            _Position = position;
         }
 
         // Public properties (accessors)
@@ -33,32 +33,32 @@ namespace ClassLibrary
 
         public string FullName
             {
-                get { return _fullName; }
-                set { _fullName = value; }
+                get { return _FullName; }
+                set { _FullName = value; }
             }
 
             public string Email
             {
-                get { return _email; }
-                set { _email = value; }
+                get { return _Email; }
+                set { _Email = value; }
             }
 
             public string Department
             {
-                get { return _department; }
-                set { _department = value; }
+                get { return _Department; }
+                set { _Department = value; }
             }
 
             public DateTime HireDate
             {
-                get { return _hireDate; }
-                set { _hireDate = value; }
+                get { return _HireDate; }
+                set { _HireDate = value; }
             }
 
             public bool IsActive
             {
-                get { return _isActive; }
-                set { _isActive = value; }
+                get { return _IsActive; }
+                set { _IsActive = value; }
             }
 
         public string Position { get; set; }
