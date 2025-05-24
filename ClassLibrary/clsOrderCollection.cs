@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 
 namespace ClassLibrary
 {
@@ -8,7 +9,7 @@ namespace ClassLibrary
         // Private data member to hold the list of orders
         private List<clsOrder> mOrderList = new List<clsOrder>();
         //private data member for thisOrder
-        clsOrder mThisOrder = new clsOrder();
+        private clsOrder mThisOrder = new clsOrder();
 
 
 
@@ -79,11 +80,19 @@ namespace ClassLibrary
 
         public int Add()
         {
-            //add a record to the database based on the values of thisOrder
-            //set the primary key of the new record
-            mThisOrder.OrderID = 2;
-            //rerturn the primary key of the new record
-            return mThisOrder.OrderID;
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set the parameters for the stored procedure
+            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@ProductID", mThisOrder.ProductID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@IsCancelled", mThisOrder.IsCancelled);
+
+            // Execute the query and return the primary key value (OrderID)
+            return DB.Execute("sproc_tblOrder_Insert");
         }
     }
 }

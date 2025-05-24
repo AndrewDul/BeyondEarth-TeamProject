@@ -109,10 +109,10 @@ namespace Testing1
             Int32 PrimaryKey = 0;
 
             // Set the properties of the test item
-            TestItem.CustomerID = 1;
-            TestItem.ProductID = 2;
+            TestItem.CustomerID =7777 ;
+            TestItem.ProductID = 555;
             TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.TotalPrice = 49.99m;
+            TestItem.TotalPrice = 19.99m;
             TestItem.OrderStatus = "Confirmed";
             TestItem.IsCancelled = false;
 
