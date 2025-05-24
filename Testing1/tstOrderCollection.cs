@@ -137,6 +137,56 @@ namespace Testing1
             Assert.AreEqual(AllOrders.ThisOrder.IsCancelled, TestItem.IsCancelled);
         }
 
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            // Create an instance of the collection
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create test item
+            clsOrder TestItem = new clsOrder();
+            Int32 PrimaryKey = 0;
+
+            // Set original values
+            TestItem.CustomerID = 1;
+            TestItem.ProductID = 2;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 100.00m;
+            TestItem.OrderStatus = "Processing";
+            TestItem.IsCancelled = false;
+
+            // Assign to ThisOrder and add it to the DB
+            AllOrders.ThisOrder = TestItem;
+            PrimaryKey = AllOrders.Add();
+
+            // Assign the returned primary key to the object
+            TestItem.OrderID = PrimaryKey;
+
+            // Modify the test item
+            TestItem.CustomerID = 99;
+            TestItem.ProductID = 999;
+            TestItem.OrderDate = DateTime.Now.Date.AddDays(1);
+            TestItem.TotalPrice = 999.99m;
+            TestItem.OrderStatus = "Updated";
+            TestItem.IsCancelled = true;
+
+            // Assign updated test item back to ThisOrder
+            AllOrders.ThisOrder = TestItem;
+
+            // Update the record
+            AllOrders.Update();
+
+            // Find the updated record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Assert that all values match the updated ones
+            Assert.AreEqual(AllOrders.ThisOrder.CustomerID, TestItem.CustomerID);
+            Assert.AreEqual(AllOrders.ThisOrder.ProductID, TestItem.ProductID);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderDate, TestItem.OrderDate);
+            Assert.AreEqual(AllOrders.ThisOrder.TotalPrice, TestItem.TotalPrice);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderStatus, TestItem.OrderStatus);
+            Assert.AreEqual(AllOrders.ThisOrder.IsCancelled, TestItem.IsCancelled);
+        }
 
     }
 }

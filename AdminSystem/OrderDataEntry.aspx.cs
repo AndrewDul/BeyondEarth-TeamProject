@@ -8,9 +8,20 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    private Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Get the OrderID from the session
+        OrderID = Convert.ToInt32(Session["OrderID"]);
 
+        if (!IsPostBack)
+        {
+            // If this is not a new record, display existing data
+            if (OrderID != -1)
+            {
+                DisplayOrder();
+            }
+        }
     }
 
     protected void txtOrderID_TextChanged(object sender, EventArgs e)
@@ -24,7 +35,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsOrder AnOrder = new clsOrder();
 
         // Capture input values as strings
-        string OrderID = txtOrderID.Text;
+        
         string CustomerID = txtCustomerID.Text;
         string ProductID = txtProductID.Text;
         string OrderDate = txtOrderDate.Text;
@@ -39,8 +50,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if (Error == "")
         {
-            // If no errors, assign values to the object
-            AnOrder.OrderID = Convert.ToInt32(OrderID);
+            // No errors – assign data
+            AnOrder.OrderID = OrderID; // ← DON'T MISS THIS BIT!!!
             AnOrder.CustomerID = Convert.ToInt32(CustomerID);
             AnOrder.ProductID = Convert.ToInt32(ProductID);
             AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
@@ -48,22 +59,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.OrderStatus = OrderStatus;
             AnOrder.IsCancelled = chkIsCancelled.Checked;
 
-            //create a new instance of the order collection
+            // Create the collection instance
             clsOrderCollection OrderList = new clsOrderCollection();
-            //set the ThisOrder proprty
-            OrderList.ThisOrder = AnOrder;
-            // Add the new record
-            OrderList.Add();
 
+            // ADD or UPDATE?
+            if (OrderID == -1)
+            {
+                OrderList.ThisOrder = AnOrder;
+                OrderList.Add();
+            }
+            else
+            {
+                OrderList.ThisOrder.Find(OrderID); // (optional but recommended)
+                OrderList.ThisOrder = AnOrder;
+                OrderList.Update();
+            }
 
-            
-
-            // Navigate to the viewer page
+            // Go back to list
             Response.Redirect("OrderList.aspx");
         }
         else
         {
-            // Display the error message
+            // Show error
             lblError.Text = Error;
         }
     }
@@ -99,4 +116,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Record not found.";
         }
     }
+
+    void DisplayOrder()
+    {
+        // Create an instance of the order collection
+        clsOrderCollection OrderList = new clsOrderCollection();
+
+        // Find the record based on OrderID from session
+        OrderList.ThisOrder.Find(OrderID);
+
+        // Display the data in the form controls
+        txtOrderID.Text = OrderList.ThisOrder.OrderID.ToString();
+        txtCustomerID.Text = OrderList.ThisOrder.CustomerID.ToString();
+        txtProductID.Text = OrderList.ThisOrder.ProductID.ToString();
+        txtOrderDate.Text = OrderList.ThisOrder.OrderDate.ToString("yyyy-MM-dd");
+        txtTotalPrice.Text = OrderList.ThisOrder.TotalPrice.ToString("F2");
+        txtOrderStatus.Text = OrderList.ThisOrder.OrderStatus;
+        chkIsCancelled.Checked = OrderList.ThisOrder.IsCancelled;
+    }
+
 }
