@@ -44,8 +44,6 @@ namespace Testing1
             Assert.AreEqual(AllOrders.OrderList, TestList);
 
         }
-
-       
        
         [TestMethod]
         public void ThisOrderPropertyOK()
@@ -98,7 +96,97 @@ namespace Testing1
             Assert.AreEqual(AllOrders.Count, TestList.Count);
         }
 
-        
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Create an instance of the collection class
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create a test item
+            clsOrder TestItem = new clsOrder();
+
+            // Variable to store the primary key
+            Int32 PrimaryKey = 0;
+
+            // Set the properties of the test item
+            TestItem.CustomerID =7777 ;
+            TestItem.ProductID = 555;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 19.99m;
+            TestItem.OrderStatus = "Confirmed";
+            TestItem.IsCancelled = false;
+
+            // Set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+
+            // Add the record and store the primary key
+            PrimaryKey = AllOrders.Add();
+
+            // Assign the primary key to the test item
+            TestItem.OrderID = PrimaryKey;
+
+            // Find the record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Test to see that the values are the same
+            Assert.AreEqual(AllOrders.ThisOrder.CustomerID, TestItem.CustomerID);
+            Assert.AreEqual(AllOrders.ThisOrder.ProductID, TestItem.ProductID);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderDate, TestItem.OrderDate);
+            Assert.AreEqual(AllOrders.ThisOrder.TotalPrice, TestItem.TotalPrice);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderStatus, TestItem.OrderStatus);
+            Assert.AreEqual(AllOrders.ThisOrder.IsCancelled, TestItem.IsCancelled);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            // Create an instance of the collection
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create test item
+            clsOrder TestItem = new clsOrder();
+            Int32 PrimaryKey = 0;
+
+            // Set original values
+            TestItem.CustomerID = 1;
+            TestItem.ProductID = 2;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 100.00m;
+            TestItem.OrderStatus = "Processing";
+            TestItem.IsCancelled = false;
+
+            // Assign to ThisOrder and add it to the DB
+            AllOrders.ThisOrder = TestItem;
+            PrimaryKey = AllOrders.Add();
+
+            // Assign the returned primary key to the object
+            TestItem.OrderID = PrimaryKey;
+
+            // Modify the test item
+            TestItem.CustomerID = 99;
+            TestItem.ProductID = 999;
+            TestItem.OrderDate = DateTime.Now.Date.AddDays(1);
+            TestItem.TotalPrice = 999.99m;
+            TestItem.OrderStatus = "Updated";
+            TestItem.IsCancelled = true;
+
+            // Assign updated test item back to ThisOrder
+            AllOrders.ThisOrder = TestItem;
+
+            // Update the record
+            AllOrders.Update();
+
+            // Find the updated record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Assert that all values match the updated ones
+            Assert.AreEqual(AllOrders.ThisOrder.CustomerID, TestItem.CustomerID);
+            Assert.AreEqual(AllOrders.ThisOrder.ProductID, TestItem.ProductID);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderDate, TestItem.OrderDate);
+            Assert.AreEqual(AllOrders.ThisOrder.TotalPrice, TestItem.TotalPrice);
+            Assert.AreEqual(AllOrders.ThisOrder.OrderStatus, TestItem.OrderStatus);
+            Assert.AreEqual(AllOrders.ThisOrder.IsCancelled, TestItem.IsCancelled);
+        }
 
     }
 }

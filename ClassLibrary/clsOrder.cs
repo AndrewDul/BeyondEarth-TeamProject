@@ -14,7 +14,13 @@ namespace ClassLibrary // Declares the namespace for class grouping
         private bool mIsCancelled; // Stores whether the order has been cancelled
 
         // Public properties (getters and setters)
-
+        public string DisplayInfo
+        {
+            get
+            {
+                return "ID: " + OrderID + " | Customer: " + CustomerID + " | Total: £" + TotalPrice + " | Status: " + OrderStatus + " | Cancelled: " + IsCancelled;
+            }
+        }
         public int OrderID
         {
             get { return mOrderID; } // Returns the OrderID value

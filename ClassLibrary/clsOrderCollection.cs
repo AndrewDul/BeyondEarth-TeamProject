@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 
 namespace ClassLibrary
 {
     public class clsOrderCollection
     {
+        // Private data member to hold the list of orders
         private List<clsOrder> mOrderList = new List<clsOrder>();
+        //private data member for thisOrder
+        private clsOrder mThisOrder = new clsOrder();
+
+
+
 
         // Constructor// Constructor for the class
         public clsOrderCollection()
@@ -63,8 +70,47 @@ namespace ClassLibrary
             set { }
         }
 
-        public clsOrder ThisOrder { get; set; }
+        public clsOrder ThisOrder 
+        { 
+            get { return mThisOrder; }
 
+            set { mThisOrder = value; }
 
+        }
+
+        public int Add()
+        {
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set the parameters for the stored procedure
+            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@ProductID", mThisOrder.ProductID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@IsCancelled", mThisOrder.IsCancelled);
+
+            // Execute the query and return the primary key value (OrderID)
+            return DB.Execute("sproc_tblOrder_Insert");
+        }
+
+        public void Update()
+        {
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set parameters for the stored procedure
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@ProductID", mThisOrder.ProductID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@IsCancelled", mThisOrder.IsCancelled);
+
+            // Execute the stored procedure
+            DB.Execute("sproc_tblOrder_Update");
+        }
     }
 }
