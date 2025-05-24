@@ -58,21 +58,29 @@ namespace ClassLibrary // Declares the namespace for class grouping
         }
 
         // FIND METHOD
-        public bool Find(int orderID)
+        public bool Find(int OrderID)
         {
-            // Set hardcoded values for testing purposes
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@OrderID", OrderID);
+            DB.Execute("sproc_tblOrder_FilterByOrderID");
 
-            mOrderID = 7; // Simulate order ID = 1
-            mCustomerID = 1; // Simulate customer ID = 1
-            mProductID = 1; // Simulate product ID = 1
-            mOrderDate = Convert.ToDateTime("2025-05-18"); // Simulate order date
-            mTotalPrice = 99.99m; // Simulate total price
-            mOrderStatus = "Pending"; // Simulate status
-            mIsCancelled = true; // Simulate cancelled state
-
-            // Return true to simulate a successful find operation
-            return true;
+            if (DB.Count == 1)
+            {
+                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
+                mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
+                mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
+                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"]);
+                mIsCancelled = Convert.ToBoolean(DB.DataTable.Rows[0]["IsCancelled"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
 
         // Valid METHOD
         public string Valid(string customerID, string productID, string orderDate, string totalPrice, string orderStatus)
