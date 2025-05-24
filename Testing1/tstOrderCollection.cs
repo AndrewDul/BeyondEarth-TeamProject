@@ -45,6 +45,77 @@ namespace Testing1
 
         }
 
+        [TestMethod]
+        public void CountPropertyOK()
+        {
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            int SomeCount = 2;
+            AllOrders.Count = SomeCount;
+            Assert.AreEqual(AllOrders.Count, SomeCount);
+        }
+
+        [TestMethod]
+        public void ThisOrderPropertyOK()
+        {
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            clsOrder TestItem = new clsOrder();
+
+            TestItem.OrderID = 1;
+            TestItem.CustomerID = 1;
+            TestItem.ProductID = 1;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 99.99m;
+            TestItem.OrderStatus = "Pending";
+            TestItem.IsCancelled = false;
+
+            AllOrders.ThisOrder = TestItem;
+
+            Assert.AreEqual(AllOrders.ThisOrder, TestItem);
+        }
+
+        [TestMethod]
+        public void ListAndCountOK()
+        {
+            // Create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create some test data to assign to the property (a list of clsOrder)
+            List<clsOrder> TestList = new List<clsOrder>();
+
+            // Create the test item
+            clsOrder TestItem = new clsOrder();
+
+            // Set its properties
+            
+            TestItem.OrderID = 2;
+            TestItem.CustomerID = 123;
+            TestItem.ProductID = 456;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 49.99m;
+            TestItem.OrderStatus = "Processing";
+            TestItem.IsCancelled = false;
+
+            // Add the test item to the test list
+            TestList.Add(TestItem);
+
+            // Assign the test list to the collection's property
+            AllOrders.OrderList = TestList;
+
+            // Check that the Count property matches the number of items in the test list
+            Assert.AreEqual(AllOrders.Count, TestList.Count);
+        }
+
+        [TestMethod]
+        public void TwoRecordsPresent()
+        {
+            // Create an instance of the collection
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Check that the count property returns 2
+            // (Assumes that your collection constructor or FillData() loads 2 test records)
+            Assert.AreEqual(AllOrders.Count,2 );
+        }
+
 
     }
 }
