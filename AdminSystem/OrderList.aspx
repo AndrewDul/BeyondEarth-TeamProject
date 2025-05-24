@@ -16,7 +16,10 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:ListBox ID="lstOrderList" runat="server" Height="335px" Width="293px"></asp:ListBox>
+        <asp:ListBox ID="lstOrderList" runat="server" Height="335px" Width="650px" OnSelectedIndexChanged="lstOrderList_SelectedIndexChanged"></asp:ListBox>
+        <br />
+        <br />
+        <asp:Button ID="btnAdd" runat="server" Height="40px" OnClick="btnAdd_Click" Text="Add" Width="62px" />
     </form>
 </body>
 </html>

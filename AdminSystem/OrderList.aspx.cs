@@ -30,9 +30,21 @@ public partial class _1_List : System.Web.UI.Page
         lstOrderList.DataValueField = "OrderID";
 
         // set the field to display in the list box (you can change it if needed)
-        lstOrderList.DataTextField = "OrderStatus";
+        lstOrderList.DataTextField = "DisplayInfo";
 
         // bind the data to the list box
         lstOrderList.DataBind();
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        Session["OrderID"] = -1; // Set OrderID to -1 for adding a new order
+        // Redirect to the Add page
+        Response.Redirect("OrderDataEntry.aspx");
+    }
+
+    protected void lstOrderList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }

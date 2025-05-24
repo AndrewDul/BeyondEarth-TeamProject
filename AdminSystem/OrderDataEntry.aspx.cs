@@ -48,11 +48,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.OrderStatus = OrderStatus;
             AnOrder.IsCancelled = chkIsCancelled.Checked;
 
-            // Store the order in the session object
-            Session["AnOrder"] = AnOrder;
+            //create a new instance of the order collection
+            clsOrderCollection OrderList = new clsOrderCollection();
+            //set the ThisOrder proprty
+            OrderList.ThisOrder = AnOrder;
+            // Add the new record
+            OrderList.Add();
+
+
+            
 
             // Navigate to the viewer page
-            Response.Redirect("OrderViewer.aspx");
+            Response.Redirect("OrderList.aspx");
         }
         else
         {
