@@ -6,13 +6,14 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="height: 345px">
+<body style="height: 500px; text-align: left; background-color: #33CCFF;">
     <form id="form1" runat="server">
         <p>
             This is Order Managment</p>
         <asp:Label ID="lblOrderID" runat="server" height="19px" style="z-index: 1; left: 29px; top: 83px; position: absolute" Text="OrderID" width="83px"></asp:Label>
         <p>
             <asp:TextBox ID="txtOrderID" runat="server" height="22px" OnTextChanged="txtOrderID_TextChanged" style="z-index: 1; left: 122px; top: 81px; position: absolute" width="128px"></asp:TextBox>
+            <asp:Button ID="btnFind" runat="server" BackColor="#339933" OnClick="btnFind_Click" style="text-align: left; top: 78px; left: 291px; position: absolute; height: 30px; width: 56px" Text="Find" />
         </p>
         <p>
             <asp:TextBox ID="txtCustomerID" runat="server" style="z-index: 1; left: 121px; top: 125px; position: absolute; height: 22px" width="128px"></asp:TextBox>
@@ -36,6 +37,18 @@
         <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 40px; top: 373px; position: absolute"></asp:Label>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 29px; top: 412px; position: absolute" Text="OK" />
         <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 191px; top: 412px; position: absolute" Text="Cancel" />
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
     </form>
+    <p style="text-align: right">
+        &nbsp;</p>
 </body>
 </html>

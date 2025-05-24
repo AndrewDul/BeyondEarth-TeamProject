@@ -60,4 +60,36 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = Error;
         }
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the Order class
+        clsOrder AnOrder = new clsOrder();
+        //create a variable to store the primary key
+        Int32 OrderID;
+        //ctreate a variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key value entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+
+
+        //if the record was found, display the data in the form
+        
+        if (Found)
+        {
+            //display the data for this record
+            txtCustomerID.Text = AnOrder.CustomerID.ToString();
+            txtProductID.Text = AnOrder.ProductID.ToString();
+            txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
+            txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
+            txtOrderStatus.Text = AnOrder.OrderStatus;
+            chkIsCancelled.Checked = AnOrder.IsCancelled;
+        }
+        else
+        {
+            lblError.Text = "Record not found.";
+        }
+    }
 }
