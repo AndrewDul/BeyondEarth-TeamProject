@@ -45,15 +45,8 @@ namespace Testing1
 
         }
 
-        [TestMethod]
-        public void CountPropertyOK()
-        {
-            clsOrderCollection AllOrders = new clsOrderCollection();
-            int SomeCount = 2;
-            AllOrders.Count = SomeCount;
-            Assert.AreEqual(AllOrders.Count, SomeCount);
-        }
-
+       
+       
         [TestMethod]
         public void ThisOrderPropertyOK()
         {
@@ -105,17 +98,7 @@ namespace Testing1
             Assert.AreEqual(AllOrders.Count, TestList.Count);
         }
 
-        [TestMethod]
-        public void TwoRecordsPresent()
-        {
-            // Create an instance of the collection
-            clsOrderCollection AllOrders = new clsOrderCollection();
-
-            // Check that the count property returns 2
-            // (Assumes that your collection constructor or FillData() loads 2 test records)
-            Assert.AreEqual(AllOrders.Count,2 );
-        }
-
+        
 
     }
 }

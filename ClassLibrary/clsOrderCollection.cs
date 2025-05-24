@@ -10,34 +10,45 @@ namespace ClassLibrary
         // Constructor// Constructor for the class
         public clsOrderCollection()
         {
-            // Create the first test order
-            clsOrder TestItem = new clsOrder();
+            // Index for the loop
+            Int32 Index = 0;
 
-            TestItem.OrderID = 1;
-            TestItem.CustomerID = 101;
-            TestItem.ProductID = 201;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.TotalPrice = 9.99m;
-            TestItem.OrderStatus = "Pending";
-            TestItem.IsCancelled = false;
+            // Store the number of records
+            Int32 RecordCount = 0;
 
-            // Add the test item to the list
-            mOrderList.Add(TestItem);
+            // Create a connection to the database
+            clsDataConnection DB = new clsDataConnection();
 
-            // Create another test order
-            TestItem = new clsOrder();
+            // Execute the stored procedure
+            DB.Execute("tblOrder_SelectAll");
 
-            TestItem.OrderID = 2;
-            TestItem.CustomerID = 102;
-            TestItem.ProductID = 202;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.TotalPrice = 19.99m;
-            TestItem.OrderStatus = "Approved";
-            TestItem.IsCancelled = true;
 
-            // Add the second test item to the list
-            mOrderList.Add(TestItem);
+            // Get the number of records returned
+            RecordCount = DB.Count;
+
+            // While there are records to process
+            while (Index < RecordCount)
+            {
+                // Create a blank order
+                clsOrder AnOrder = new clsOrder();
+
+                // Read in the fields from the current record
+                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+                AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
+
+                // Add the order to the list
+                mOrderList.Add(AnOrder);
+
+                // Move to the next record
+                Index++;
+            }
         }
+
 
 
         public List<clsOrder> OrderList
