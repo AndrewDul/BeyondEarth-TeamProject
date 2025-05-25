@@ -7,6 +7,20 @@ namespace Testing2
     [TestClass]
     public class tstAddress
     {
+        // ✅ Declare private fields (not public auto-properties)
+        private string FullName;
+        private string Department;
+        private string HireDate;
+
+        // ✅ Assign values before each test
+        [TestInitialize]
+        public void SetupTestData()
+        {
+            FullName = "Yasser Saeed";
+            Department = "IT";
+            HireDate = DateTime.Now.Date.ToString();
+        }
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -89,8 +103,6 @@ namespace Testing2
             Assert.IsTrue(OK);
         }
 
-        
-
         [TestMethod]
         public void TestDepartmentFound()
         {
@@ -119,6 +131,14 @@ namespace Testing2
             bool OK = true;
             if (AStaff.IsActive != true) OK = false;
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsAddress AStaff = new clsAddress();
+            string Error = AStaff.Valid(FullName, Department, HireDate);
+            Assert.AreEqual(Error, "");
         }
     }
 }

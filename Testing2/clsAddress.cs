@@ -61,6 +61,52 @@ namespace ClassLibrary
                 return false;
             }
         }
+        public string Valid(string fullName, string department, string hireDate)
+        {
+            string Error = "";
+            DateTime DateTemp;
+            DateTime Today = DateTime.Now.Date;
+
+            // FullName Validation
+            if (fullName.Length == 0)
+            {
+                Error += "The full name may not be blank : ";
+            }
+            if (fullName.Length > 50)
+            {
+                Error += "The full name must be less than or equal to 50 characters : ";
+            }
+
+            // Department Validation
+            if (department.Length == 0)
+            {
+                Error += "The department may not be blank : ";
+            }
+            if (department.Length > 30)
+            {
+                Error += "The department must be less than or equal to 30 characters : ";
+            }
+
+            // HireDate Validation
+            try
+            {
+                DateTemp = Convert.ToDateTime(hireDate);
+                if (DateTemp < Today.AddYears(-50))
+                {
+                    Error += "The hire date cannot be more than 50 years in the past : ";
+                }
+                if (DateTemp > Today)
+                {
+                    Error += "The hire date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                Error += "The hire date was not a valid date : ";
+            }
+
+            return Error;
+        }
 
     }
 }
