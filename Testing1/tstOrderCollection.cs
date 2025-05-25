@@ -226,5 +226,34 @@ namespace Testing1
             Assert.IsFalse(Found);
         }
 
+        [TestMethod]
+        public void ReportByStatusMethodOK()
+        {
+            // Create an instance with all records (unfiltered)
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create an instance for filtered results
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // Apply blank filter - should return all records
+            FilteredOrders.ReportByStatus("");
+
+            // Check if the counts match
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByStatusNoneFound()
+        {
+            // Create an instance of the filtered collection
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // Apply a status that doesn't exist in the database
+            FilteredOrders.ReportByStatus("xxxxxx");
+
+            // Check that no records are returned
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
     }
+
 }

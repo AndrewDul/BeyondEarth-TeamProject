@@ -29,6 +29,9 @@ namespace ClassLibrary
             // Execute the stored procedure
             DB.Execute("tblOrder_SelectAll");
 
+            //populate the array with the data from the database
+            PopulateArray(DB);
+
 
             // Get the number of records returned
             RecordCount = DB.Count;
@@ -106,6 +109,23 @@ namespace ClassLibrary
             DB.Execute("sproc_tblOrder_Delete");
         }
 
+        public void ReportByStatus(string OrderStatus)
+        {
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Send the OrderStatus parameter to the database
+            DB.AddParameter("@OrderStatus", OrderStatus);
+
+            // Execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByStatus");
+            // Populate the array with the data from the database
+            PopulateArray(DB);
+
+
+
+        }
+
         public void Update()
         {
             // Connect to the database
@@ -123,5 +143,40 @@ namespace ClassLibrary
             // Execute the stored procedure
             DB.Execute("sproc_tblOrder_Update");
         }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            // Initialise the index
+            Int32 Index = 0;
+
+            // Get the number of records
+            Int32 RecordCount = DB.Count;
+
+            // Clear the private list
+            mOrderList = new List<clsOrder>();
+
+            // While there are records to process
+            while (Index < RecordCount)
+            {
+                // Create a blank order
+                clsOrder AnOrder = new clsOrder();
+
+                // Read in the fields from the current row
+                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+                AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
+
+                // Add the order to the private list
+                mOrderList.Add(AnOrder);
+
+                // Move to the next record
+                Index++;
+            }
+        }
+
     }
-}
+    }
