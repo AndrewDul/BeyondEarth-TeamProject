@@ -44,16 +44,19 @@ namespace ClassLibrary
 
 
         /****** FIND METHOD ******/
-        public bool Find(int StaffId)
+        public bool Find(int AddressId)
         {
-            // Simulated test data (make sure it matches your tests exactly)
-            if (StaffId == 8)
+            // set the private data members to the test data value
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@AddressId" , AddressId);
+            DB.Execute("sporc_tblAddress_FilterByAddressId");
+            if (DB.Count == 1 )
             {
-                mStaffId = 8;
-                mFullName = "Yasser Saeed";
-                mDepartment = "IT";
-                mHireDate = Convert.ToDateTime("2023-01-15");
-                mIsActive = true;
+                mStaffId = Convert.ToInt32(DB.DataTable.Rows[0]["StaffId"]);
+                mFullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
+                mDepartment = Convert.ToString(DB.DataTable.Rows[0]["Department"]);
+                mHireDate = Convert.ToDateTime(DB.DataTable.Rows[0]["HireDate"]);
+                mIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
                 return true;
             }
             else
