@@ -1,45 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using ClassLibrary;
 
 public partial class DataEntry : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // No need to add anything here unless needed
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e)
     {
-        //OK  
-    }
+        // Create a new instance of clsStaff
+        clsStaff staff = new clsStaff(""); // Pass a position string if needed
 
-    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-    {
+        // Get values from text boxes
+        string fullName = txtFullName.Text;
+        string email = txtEmail.Text;
+        string department = txtDepartment.Text;
 
-    }
+        // Call the validation method
+        string errorMsg = staff.Valid(fullName, email, department);
 
-    protected void Button2_Click(object sender, EventArgs e)
-    {
+        // Check if validation passed
+        if (string.IsNullOrEmpty(errorMsg))
+        {
+            // Assign properties (optional)
+            staff.FullName = fullName;
+            staff.Email = email;
+            staff.Department = department;
+            staff.IsActive = chkIsActive.Checked;
 
-    }
-
-    protected void TextBox1_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void CheckBox1_CheckedChanged1(object sender, EventArgs e)
-    {
-
+            lblError.ForeColor = System.Drawing.Color.Green;
+            lblError.Text = "Validation passed. Staff data is ready!";
+        }
+        else
+        {
+            // Display errors
+            lblError.ForeColor = System.Drawing.Color.Red;
+            lblError.Text = errorMsg.Replace("\n", "<br/>");
+        }
     }
 }

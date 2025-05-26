@@ -1,41 +1,31 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DataEntry.aspx.cs" Inherits="DataEntry" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Staff Data Entry</title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+            <h2>Staff Data Entry</h2>
+
+            <asp:Label ID="lblFullName" runat="server" Text="Full Name:"></asp:Label><br />
+            <asp:TextBox ID="txtFullName" runat="server"></asp:TextBox><br /><br />
+
+            <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label><br />
+            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br /><br />
+
+            <asp:Label ID="lblDepartment" runat="server" Text="Department:"></asp:Label><br />
+            <asp:TextBox ID="txtDepartment" runat="server"></asp:TextBox><br /><br />
+
+            <asp:Label ID="lblIsActive" runat="server" Text="Is Active:"></asp:Label>
+            <asp:CheckBox ID="chkIsActive" runat="server" /><br /><br />
+
+            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label><br /><br />
+
+            <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
         </div>
-        Staff ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBox1" runat="server" Height="51px" Width="200px" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
-        <p>
-&nbsp;&nbsp;
-        </p>
-        <p>
-            <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged1" style="z-index: 1; left: 409px; top: 225px; position: absolute; height: 40px; width: 192px" />
-        </p>
-        <p>
-            Full Name : <asp:TextBox ID="TextBox2" runat="server" Height="51px" Width="200px"></asp:TextBox>
-        </p>
-        <p>
-            &nbsp;</p>
-        <p>
-            Position :&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBox3" runat="server" Height="50px" Width="201px"></asp:TextBox>
-            <asp:CheckBox ID="CheckBox2" runat="server" OnCheckedChanged="CheckBox2_CheckedChanged" style="z-index: 1; left: 393px; top: 367px; position: absolute" />
-        </p>
-        <p>
-            &nbsp;</p>
- &nbsp;</p>
-        <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Button2" runat="server" Text="Cancel" OnClick="Button2_Click" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="OK" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
     </form>
 </body>
 </html>
