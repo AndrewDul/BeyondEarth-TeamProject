@@ -17,50 +17,17 @@ namespace ClassLibrary
         // Constructor// Constructor for the class
         public clsOrderCollection()
         {
-            // Index for the loop
-            Int32 Index = 0;
-
-            // Store the number of records
-            Int32 RecordCount = 0;
-
-            // Create a connection to the database
+            // object for data connection
             clsDataConnection DB = new clsDataConnection();
 
-            // Execute the stored procedure
+            // execute the stored procedure to select all orders
             DB.Execute("tblOrder_SelectAll");
 
-            //populate the array with the data from the database
+            // populate the array list with the data table
             PopulateArray(DB);
-
-
-            // Get the number of records returned
-            RecordCount = DB.Count;
-
-            // While there are records to process
-            while (Index < RecordCount)
-            {
-                // Create a blank order
-                clsOrder AnOrder = new clsOrder();
-
-                // Read in the fields from the current record
-                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
-                AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
-                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
-                AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
-
-                // Add the order to the list
-                mOrderList.Add(AnOrder);
-
-                // Move to the next record
-                Index++;
-            }
         }
 
-
-
+        
         public List<clsOrder> OrderList
         {
             get { return mOrderList; }
@@ -112,18 +79,18 @@ namespace ClassLibrary
         public void ReportByStatus(string OrderStatus)
         {
             // Connect to the database
+            
             clsDataConnection DB = new clsDataConnection();
 
-            // Send the OrderStatus parameter to the database
+            // trim the status and send it as a parameter
+            OrderStatus = OrderStatus.Trim();
             DB.AddParameter("@OrderStatus", OrderStatus);
 
-            // Execute the stored procedure
+            // execute the stored procedure
             DB.Execute("sproc_tblOrder_FilterByStatus");
-            // Populate the array with the data from the database
+
+            // populate the array list with the data table
             PopulateArray(DB);
-
-
-
         }
 
         public void Update()
@@ -143,25 +110,25 @@ namespace ClassLibrary
             // Execute the stored procedure
             DB.Execute("sproc_tblOrder_Update");
         }
-
-        void PopulateArray(clsDataConnection DB)
+        
+        private void PopulateArray(clsDataConnection DB)
         {
-            // Initialise the index
+            // Variable to store the index
             Int32 Index = 0;
 
-            // Get the number of records
+            // Variable to store the record count
             Int32 RecordCount = DB.Count;
 
-            // Clear the private list
+            // Clear the private list before populating
             mOrderList = new List<clsOrder>();
 
             // While there are records to process
             while (Index < RecordCount)
             {
-                // Create a blank order
+                // Create a blank order object
                 clsOrder AnOrder = new clsOrder();
 
-                // Read in the fields from the current row
+                // Read in the fields from the current record
                 AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
                 AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
                 AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
@@ -170,13 +137,12 @@ namespace ClassLibrary
                 AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
                 AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
 
-                // Add the order to the private list
+                // Add the record to the private data member
                 mOrderList.Add(AnOrder);
 
-                // Move to the next record
+                // Point at the next record
                 Index++;
             }
         }
-
     }
     }

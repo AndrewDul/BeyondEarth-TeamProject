@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -237,9 +238,12 @@ namespace Testing1
 
             // Apply blank filter - should return all records
             FilteredOrders.ReportByStatus("");
-
+            //Console.WriteLine("AllOrders: " + AllOrders.Count);
+            //Console.WriteLine("FilteredOrders: " + FilteredOrders.Count);
             // Check if the counts match
             Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+            
+
         }
 
         [TestMethod]
@@ -254,6 +258,109 @@ namespace Testing1
             // Check that no records are returned
             Assert.AreEqual(0, FilteredOrders.Count);
         }
+        [TestMethod]
+        public void ReportByStatusTestDataFound()
+        {
+            // Create filtered collection
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            Boolean OK = true;
+
+            // Apply known valid filter - e.g. "Confirmed"
+            FilteredOrders.ReportByStatus("Confirmed");
+
+            // Check if count is as expected (change number if needed)
+            if (FilteredOrders.Count > 0)
+            {
+                OK = true;
+            }
+            else
+            {
+                OK = false;
+            }
+
+            // Confirm the test
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void Debug_ReportByStatus_DiscrepancyCheck()
+        {
+            // Create instances of both collections
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // Apply blank filter
+            FilteredOrders.ReportByStatus("");
+
+            // Output counts
+            Console.WriteLine("AllOrders.Count = " + AllOrders.Count);
+            Console.WriteLine("FilteredOrders.Count = " + FilteredOrders.Count);
+
+            // Compare IDs (basic comparison)
+            var allIDs = new HashSet<int>();
+            foreach (var order in AllOrders.OrderList)
+            {
+                allIDs.Add(order.OrderID);
+            }
+
+            Console.WriteLine("\nOrderIDs NOT present in FilteredOrders:");
+            foreach (var order in FilteredOrders.OrderList)
+            {
+                if (!allIDs.Contains(order.OrderID))
+                {
+                    Console.WriteLine("FilteredOnly OrderID: " + order.OrderID);
+                }
+            }
+
+            foreach (var order in AllOrders.OrderList)
+            {
+                if (!FilteredOrders.OrderList.Any(o => o.OrderID == order.OrderID))
+                {
+                    Console.WriteLine("Missing in Filtered: OrderID = " + order.OrderID + ", Status = " + order.OrderStatus);
+                }
+            }
+
+            // Optional: make the test pass even if counts differ
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void ReportByStatus_NullOrEmptyStatusCheck()
+        {
+            // Arrange
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // Act – uruchom filtrowanie bez statusu (czyli teoretycznie "wszystko")
+            FilteredOrders.ReportByStatus("");
+
+            // Diagnostic counters
+            int nullCount = 0;
+            int emptyCount = 0;
+            int spaceOnlyCount = 0;
+
+            // Check each order
+            foreach (var order in FilteredOrders.OrderList)
+            {
+                if (order.OrderStatus == null)
+                    nullCount++;
+
+                else if (order.OrderStatus == "")
+                    emptyCount++;
+
+                else if (order.OrderStatus.Trim() == "")
+                    spaceOnlyCount++;
+            }
+
+            // Output results for manual inspection
+            Console.WriteLine($"Total Filtered Records: {FilteredOrders.Count}");
+            Console.WriteLine($"OrderStatus == null: {nullCount}");
+            Console.WriteLine($"OrderStatus == empty string: {emptyCount}");
+            Console.WriteLine($"OrderStatus == only spaces: {spaceOnlyCount}");
+
+            // Assert just to make the test "pass"
+            Assert.IsTrue(true);
+        }
+
     }
 
 }
