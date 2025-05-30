@@ -17,47 +17,17 @@ namespace ClassLibrary
         // Constructor// Constructor for the class
         public clsOrderCollection()
         {
-            // Index for the loop
-            Int32 Index = 0;
-
-            // Store the number of records
-            Int32 RecordCount = 0;
-
-            // Create a connection to the database
+            // object for data connection
             clsDataConnection DB = new clsDataConnection();
 
-            // Execute the stored procedure
+            // execute the stored procedure to select all orders
             DB.Execute("tblOrder_SelectAll");
 
-
-            // Get the number of records returned
-            RecordCount = DB.Count;
-
-            // While there are records to process
-            while (Index < RecordCount)
-            {
-                // Create a blank order
-                clsOrder AnOrder = new clsOrder();
-
-                // Read in the fields from the current record
-                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
-                AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
-                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
-                AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
-
-                // Add the order to the list
-                mOrderList.Add(AnOrder);
-
-                // Move to the next record
-                Index++;
-            }
+            // populate the array list with the data table
+            PopulateArray(DB);
         }
 
-
-
+        
         public List<clsOrder> OrderList
         {
             get { return mOrderList; }
@@ -95,6 +65,34 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblOrder_Insert");
         }
 
+        public void Delete()
+        {
+            //deletes the record pointed to by ThisOrder
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // Set the parameter for the stored procedure
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+            // Execute the stored procedure to delete the record
+            DB.Execute("sproc_tblOrder_Delete");
+        }
+
+        public void ReportByStatus(string OrderStatus)
+        {
+            // Connect to the database
+            
+            clsDataConnection DB = new clsDataConnection();
+
+            // trim the status and send it as a parameter
+            OrderStatus = OrderStatus.Trim();
+            DB.AddParameter("@OrderStatus", OrderStatus);
+
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByStatus");
+
+            // populate the array list with the data table
+            PopulateArray(DB);
+        }
+
         public void Update()
         {
             // Connect to the database
@@ -112,5 +110,39 @@ namespace ClassLibrary
             // Execute the stored procedure
             DB.Execute("sproc_tblOrder_Update");
         }
+        
+        private void PopulateArray(clsDataConnection DB)
+        {
+            // Variable to store the index
+            Int32 Index = 0;
+
+            // Variable to store the record count
+            Int32 RecordCount = DB.Count;
+
+            // Clear the private list before populating
+            mOrderList = new List<clsOrder>();
+
+            // While there are records to process
+            while (Index < RecordCount)
+            {
+                // Create a blank order object
+                clsOrder AnOrder = new clsOrder();
+
+                // Read in the fields from the current record
+                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                AnOrder.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                AnOrder.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+                AnOrder.IsCancelled = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsCancelled"]);
+
+                // Add the record to the private data member
+                mOrderList.Add(AnOrder);
+
+                // Point at the next record
+                Index++;
+            }
+        }
     }
-}
+    }

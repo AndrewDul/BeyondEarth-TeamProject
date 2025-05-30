@@ -18,7 +18,7 @@ namespace ClassLibrary // Declares the namespace for class grouping
         {
             get
             {
-                return "ID: " + OrderID + " | Customer: " + CustomerID + " | Total: £" + TotalPrice + " | Status: " + OrderStatus + " | Cancelled: " + IsCancelled;
+                return $"🎯 OrderID: {OrderID}    | 🧍 CustomerID: {CustomerID}    | 📦 ProductID: {ProductID}    | 🗓️ Date: {OrderDate:dd/MM/yyyy}    | 💰 Price: £{TotalPrice:F2}    | 📌 Status: {OrderStatus}    | ❌ Cancelled: {IsCancelled}";
             }
         }
         public int OrderID
