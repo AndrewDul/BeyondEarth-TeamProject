@@ -138,4 +138,9 @@ public partial class _1_List : System.Web.UI.Page
         lstOrderList.DataBind();
     }
 
+
+    protected void btnToStPage_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("OrderStatistics.aspx");
+    }
 }

@@ -27,6 +27,7 @@
         <asp:TextBox ID="txtFilter" runat="server"  style="top: 483px; left: 162px; position: absolute; height: 25px; width: 168px"></asp:TextBox>
         <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" style="top: 548px; left: 50px; position: absolute; height: 40px; width: 110px" Text="Apply Filter" />
         <asp:Button ID="btnClearFilter" runat="server" style="top: 547px; left: 216px; position: absolute; height: 40px; width: 110px" Text="Clear Filter" OnClick="btnClearFilter_Click" />
+        <asp:Button ID="btnToStPage" runat="server" OnClick="btnToStPage_Click" style="top: 546px; left: 410px; position: absolute; height: 40px; width: 161px" Text="Statistics Page" />
     </form>
 </body>
 </html>
