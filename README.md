@@ -111,7 +111,19 @@ This repository contains the implementation of the **Order Management System**, 
 
 ## 📁 Folder Structure (Simplified)
 
-<pre> ```text 📁 BeyondEarth-TeamProject/ ├── AdminSystem/ │ ├── OrderList.aspx │ ├── OrderDataEntry.aspx │ ├── OrderStatistics.aspx │ ├── OrderConfirmDelete.aspx │ └── TeamMainMenu.aspx ├── ClassLibrary/ │ ├── clsOrder.cs │ └── clsOrderCollection.cs ├── OrderTest/ │ └── tstOrder.cs └── README.md ``` </pre>
+BeyondEarth-TeamProject/
+├── AdminSystem/
+│   ├── OrderList.aspx
+│   ├── OrderDataEntry.aspx
+│   ├── OrderStatistics.aspx
+│   ├── OrderConfirmDelete.aspx
+│   └── TeamMainMenu.aspx
+├── ClassLibrary/
+│   ├── clsOrder.cs
+│   └── clsOrderCollection.cs
+├── OrderTest/
+│   └── tstOrder.cs
+└── README.md
 ---
 
 ## 📄 License
