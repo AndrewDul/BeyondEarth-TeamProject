@@ -14,8 +14,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
         <asp:ListBox ID="lstOrderList" runat="server" Height="335px" Width="1010px" OnSelectedIndexChanged="lstOrderList_SelectedIndexChanged"></asp:ListBox>
         <br />
         <br />
@@ -28,6 +26,7 @@
         <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" style="top: 548px; left: 50px; position: absolute; height: 40px; width: 110px" Text="Apply Filter" />
         <asp:Button ID="btnClearFilter" runat="server" style="top: 547px; left: 216px; position: absolute; height: 40px; width: 110px" Text="Clear Filter" OnClick="btnClearFilter_Click" />
         <asp:Button ID="btnToStPage" runat="server" OnClick="btnToStPage_Click" style="top: 546px; left: 410px; position: absolute; height: 40px; width: 161px" Text="Statistics Page" />
+        <asp:Button ID="btnReturn" runat="server" ClientIDMode="Static" OnClick="btnReturn_Click" style="top: 473px; left: 411px; position: absolute; height: 40px; width: 160px" Text="Return to Main Menu" />
     </form>
 </body>
 </html>
