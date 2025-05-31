@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using ClassLibrary;
@@ -360,6 +361,40 @@ namespace Testing1
             // Assert just to make the test "pass"
             Assert.IsTrue(true);
         }
+
+        [TestMethod]
+        public void StatStatisticsGroupedByStatus()
+        {
+            // Create an instance of the class
+            clsOrderCollection Orders = new clsOrderCollection();
+
+            // Invoke the method
+            DataTable dt = Orders.StatisticsGroupedByStatus();
+
+            // Set expected number of groups (update if needed)
+            int noOfRecords = 8;
+
+            // Assert the result
+            Assert.AreEqual(noOfRecords, dt.Rows.Count);
+        }
+
+
+        [TestMethod]
+        public void StatStatisticsGroupedByOrderDate()
+        {
+            // Create an instance of the class
+            clsOrderCollection Orders = new clsOrderCollection();
+
+            // Invoke the method
+            DataTable dt = Orders.StatisticsGroupedByDate();
+
+            // Set expected number of records (update if needed)
+            int noOfRecords = 12;
+
+            // Assert the result
+            Assert.AreEqual(noOfRecords, dt.Rows.Count);
+        }
+
 
     }
 

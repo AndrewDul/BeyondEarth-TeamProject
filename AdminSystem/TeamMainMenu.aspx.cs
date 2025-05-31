@@ -11,4 +11,24 @@ public partial class TeamMainMenu : System.Web.UI.Page
     {
 
     }
+
+    protected void btnOrderMgmt_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("OrderList.aspx");
+    }
+
+    protected void btnCustomerMgmt_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("2List.aspx");
+    }
+
+    protected void btnStaffMgmt_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("2List.aspx");
+    }
+    protected void btnStockMgmt_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("2List.aspx"); // lub poprawna strona Moeeza
+    }
+
 }

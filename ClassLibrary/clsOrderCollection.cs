@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Runtime.Remoting.Contexts;
 
 namespace ClassLibrary
@@ -144,5 +145,32 @@ namespace ClassLibrary
                 Index++;
             }
         }
+
+        /****** Statistics Grouped by OrderDate METHOD ******/
+        public DataTable StatisticsGroupedByDate()
+        {
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+
+            // execute the stored procedure
+            DB.Execute("tblOrder_Count_GroupByDate");
+
+            // return the result table
+            return DB.DataTable;
+        }
+
+        /****** Statistics Grouped by OrderStatus METHOD ******/
+        public DataTable StatisticsGroupedByStatus()
+        {
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+
+            // execute the stored procedure
+            DB.Execute("tblOrder_Count_GroupByStatus");
+
+            // return the result table
+            return DB.DataTable;
+        }
+
     }
-    }
+}

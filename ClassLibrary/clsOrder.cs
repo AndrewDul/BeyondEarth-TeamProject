@@ -1,4 +1,5 @@
-﻿using System; // Gives access to basic system types like Int32, DateTime, etc.
+﻿using System;
+using System.Data; // Gives access to basic system types like Int32, DateTime, etc.
 
 namespace ClassLibrary // Declares the namespace for class grouping
 {
@@ -188,5 +189,6 @@ namespace ClassLibrary // Declares the namespace for class grouping
             return Error;
         }
 
-    }
+
+   }
 }
