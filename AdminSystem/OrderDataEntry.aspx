@@ -1,54 +1,150 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderDataEntry.aspx.cs" Inherits="_1_DataEntry" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Order Management</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d0d0d, #2b2b2b);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #f2f2f2;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            background-color: #1e1e1e;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 0 transparent;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-custom {
+            background-color: #1e1e1e;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 5px 5px 10px #141414, -5px -5px 10px #2e2e2e;
+        }
+
+        .btn-custom:hover {
+            box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #2e2e2e;
+            transform: scale(1.02);
+        }
+
+        .row-flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-section {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .checkbox {
+            margin-top: 10px;
+        }
+
+        #lblError {
+            color: #ff7070;
+            margin-top: 10px;
+        }
+
+        .container-custom {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .card-custom {
+            background-color: #2c2c2e;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+        }
+    </style>
 </head>
-<body style="height: 500px; text-align: left; background-color: #33CCFF;">
+<body>
     <form id="form1" runat="server">
-        <p>
-            This is Order Managment</p>
-        <asp:Label ID="lblOrderID" runat="server" height="19px" style="z-index: 1; left: 29px; top: 83px; position: absolute" Text="OrderID" width="83px"></asp:Label>
-        <p>
-            <asp:TextBox ID="txtOrderID" runat="server" height="22px" OnTextChanged="txtOrderID_TextChanged" style="z-index: 1; left: 122px; top: 81px; position: absolute" width="128px"></asp:TextBox>
-            <asp:Button ID="btnFind" runat="server" BackColor="#339933" OnClick="btnFind_Click" style="text-align: left; top: 78px; left: 291px; position: absolute; height: 30px; width: 56px" Text="Find" />
-        </p>
-        <p>
-            <asp:TextBox ID="txtCustomerID" runat="server" style="z-index: 1; left: 121px; top: 125px; position: absolute; height: 22px" width="128px"></asp:TextBox>
-            <asp:Label ID="lblCustomerID" runat="server" height="19px" style="z-index: 1; left: 29px; top: 128px; position: absolute" Text="CustomerID" width="83px"></asp:Label>
-        </p>
-        <asp:TextBox ID="txtProductID" runat="server" height="22px" style="z-index: 1; left: 121px; top: 169px; position: absolute" width="128px"></asp:TextBox>
-        <asp:TextBox ID="txtOrderDate" runat="server" style="z-index: 1; left: 121px; top: 205px; position: absolute; width: 124px; height: 22px"></asp:TextBox>
-        <asp:TextBox ID="txtOrderStatus" runat="server" height="22px" style="z-index: 1; left: 121px; top: 289px; position: absolute" width="128px"></asp:TextBox>
-        <asp:TextBox ID="txtTotalPrice" runat="server" height="22px" style="z-index: 1; left: 121px; top: 248px; position: absolute" width="128px"></asp:TextBox>
-        <p>
-            <asp:Label ID="lblProductID" runat="server" style="z-index: 1; left: 29px; top: 171px; position: absolute; width: 83px" Text="ProductID"></asp:Label>
-            <asp:Label ID="lblTotalPrice" runat="server" height="19px" style="z-index: 1; left: 29px; top: 251px; position: absolute" Text="TotalPrice" width="83px"></asp:Label>
-        </p>
-        <asp:Label ID="lblOrderDate" runat="server" height="19px" style="z-index: 1; left: 29px; top: 209px; position: absolute" Text="OrderDate" width="83px"></asp:Label>
-        <p>
-            <asp:Label ID="lblOrderStatus" runat="server" height="19px" style="z-index: 1; left: 29px; top: 291px; position: absolute" Text="OrderStatus" width="83px"></asp:Label>
-            &nbsp;</p>
-        <p>
-            &nbsp;</p>
-        <asp:CheckBox ID="chkIsCancelled" runat="server" style="z-index: 1; left: 123px; top: 329px; position: absolute" Text="Cancelled" />
-        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 40px; top: 373px; position: absolute"></asp:Label>
-        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 29px; top: 412px; position: absolute" Text="OK" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 191px; top: 412px; position: absolute" Text="Cancel" OnClick="btnCancel_Click" />
-        <p>
-            &nbsp;</p>
-        <p>
-            &nbsp;</p>
-        <p>
-            &nbsp;</p>
-        <p>
-            &nbsp;</p>
-        <p>
-            &nbsp;</p>
+        <div class="container-custom">
+            <div class="card-custom">
+                <h2>Order Management</h2>
+
+               <div class="form-group">
+    <label class="form-label">Order ID</label>
+    <div class="row-flex">
+        <asp:TextBox ID="txtOrderID" runat="server" CssClass="form-control" Width="60%" placeholder="Order ID"></asp:TextBox>
+        <asp:Button ID="btnFind" runat="server" CssClass="btn-custom" Text="Find" OnClick="btnFind_Click" />
+    </div>
+</div>
+
+                <div class="form-group">
+                    <label class="form-label">Customer ID</label>
+                    <asp:TextBox ID="txtCustomerID" runat="server" CssClass="form-control" placeholder="Customer ID"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Product ID</label>
+                    <asp:TextBox ID="txtProductID" runat="server" CssClass="form-control" placeholder="Product ID"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Order Date</label>
+                    <asp:TextBox ID="txtOrderDate" runat="server" CssClass="form-control" placeholder="yyyy-mm-dd"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Total Price</label>
+                    <asp:TextBox ID="txtTotalPrice" runat="server" CssClass="form-control" placeholder="Total Price (£)"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Order Status</label>
+                    <asp:TextBox ID="txtOrderStatus" runat="server" CssClass="form-control" placeholder="Order Status"></asp:TextBox>
+                </div>
+
+                <div class="checkbox">
+                    <asp:CheckBox ID="chkIsCancelled" runat="server" Text="Cancelled" ForeColor="White" />
+                </div>
+
+                <asp:Label ID="lblError" runat="server"></asp:Label>
+
+                <div class="btn-section">
+                    <asp:Button ID="btnOK" runat="server" CssClass="btn-custom" Text="OK" OnClick="btnOK_Click" />
+                    <asp:Button ID="btnCancel" runat="server" CssClass="btn-custom" Text="Cancel" OnClick="btnCancel_Click" />
+                </div>
+            </div>
+        </div>
     </form>
-    <p style="text-align: right">
-        &nbsp;</p>
 </body>
 </html>
