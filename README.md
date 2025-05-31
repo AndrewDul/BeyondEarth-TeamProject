@@ -136,7 +136,7 @@ BeyondEarth-TeamProject/
 
 ![Order List Page](img/TeamMainMenu.png)
 
-### Order Order List
+### Order List
 
 ![Order Entry Page](img/OrderList.png)
 
@@ -144,7 +144,7 @@ BeyondEarth-TeamProject/
 
 ![Statistics Page](img/OrderDataEntry.png)
 
-### Order Order Confirm Delete
+### Order Confirm Delete
 
 ![Statistics Page](img/OrderConfirmDelete.png)
 
