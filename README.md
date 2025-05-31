@@ -13,9 +13,10 @@ This repository contains the implementation of the **Order Management System**, 
 ## 👨‍💻 Developer Responsibility
 
 **Component**: Order Management  
-**Developer**: Andrzej Dul  
+**Developer**: Andrzej Dul
 
 **Responsibilities**:
+
 - `clsOrder` class (business logic)
 - `clsOrderCollection` and integration with SQL
 - Web Forms: `OrderList.aspx`, `OrderDataEntry.aspx`, `OrderStatistics.aspx`, `OrderConfirmDelete.aspx`, `TeamMainMenu.aspx`
@@ -100,12 +101,12 @@ This repository contains the implementation of the **Order Management System**, 
 
 ## 🧑‍🤝‍🧑 Team Members & Components
 
-| Member        | Component            |
-|---------------|----------------------|
-| **Andrzej Dul**   | Order Management     |
-| **Ahmad Moeez**   | Stock Management     |
-| **Yasser**        | Staff Management     |
-| **Amir**          | Customer Management  |
+| Member          | Component           |
+| --------------- | ------------------- |
+| **Andrzej Dul** | Order Management    |
+| **Ahmad Moeez** | Stock Management    |
+| **Yasser**      | Staff Management    |
+| **Amir**        | Customer Management |
 
 ---
 
@@ -126,9 +127,31 @@ BeyondEarth-TeamProject/
 │   └── tstOrder.cs
 └── README.md
 ```
+
 ---
+
+## 🖼️ Screenshots
+
+### Team Main Menu
+
+![Order List Page](img/TeamMainMenu.png)
+
+### Order Order List
+
+![Order Entry Page](img/OrderList.png)
+
+### Order Data Entry
+
+![Statistics Page](img/OrderDataEntry.png)
+
+### Order Order Confirm Delete
+
+![Statistics Page](img/OrderConfirmDelete.png)
+
+### Order Statistics
+
+![Statistics Page](img/OrderStatistics.png)
 
 ## 📄 License
 
 This project is for educational use under the CTEC2714 module at De Montfort University. All rights reserved to the development team.
-
