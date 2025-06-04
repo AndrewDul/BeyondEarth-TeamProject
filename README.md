@@ -106,7 +106,7 @@ This repository contains the implementation of the **Order Management System**, 
 | **Andrzej Dul** | Order Management    |
 | **Ahmad Moeez** | Stock Management    |
 | **Yasser**      | Staff Management    |
-| **Amir**        | Customer Management |
+| **Amer**        | Customer Management |
 
 ---
 
