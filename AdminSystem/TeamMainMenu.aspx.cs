@@ -28,7 +28,7 @@ public partial class TeamMainMenu : System.Web.UI.Page
     }
     protected void btnStockMgmt_Click(object sender, EventArgs e)
     {
-        Response.Redirect("2List.aspx"); // lub poprawna strona Moeeza
+        Response.Redirect("StockDataEntry.aspx"); //  ahmed
     }
 
 }

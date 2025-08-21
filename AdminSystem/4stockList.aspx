@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="4stockList.aspx.cs" Inherits="_1_List" %>
+<%--<%@ Page Language="C#" AutoEventWireup="true" CodeFile="4stockList.aspx.cs" Inherits="_1_List" %>
 
 <!DOCTYPE html>
 
@@ -12,4 +12,4 @@
         </div>
     </form>
 </body>
-</html>
+</html>--%>

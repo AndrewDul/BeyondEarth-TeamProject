@@ -2,13 +2,13 @@
 
 namespace ClassLibrary
 {
-    public class clsStock
+    public class clsArchivedStock
     {
         // ------- Properties -------
         public int StockId { get; set; }
         public string StockName { get; set; }
         public string SupplierName { get; set; }
-        public int StockSellingPrice { get; set; }
+        public int StockSellingPrice { get; set; }   // int to match your example/tests
         public int StockQuantity { get; set; }
         public DateTime DateAdded { get; set; }
         public bool Active { get; set; }
@@ -16,10 +16,9 @@ namespace ClassLibrary
         // ------- Methods -------
         public bool Find(int stockId)
         {
-            // Connect to DB
             var DB = new clsDataConnection();
             DB.AddParameter("@StockId", stockId);
-            DB.Execute("sproc_tblStock_FilterByStockId");
+            DB.Execute("sproc_tblArchivedStock_FilterByStockId");
 
             if (DB.Count == 1)
             {
@@ -27,9 +26,9 @@ namespace ClassLibrary
                 StockId = Convert.ToInt32(row["StockId"]);
                 StockName = Convert.ToString(row["StockName"]);
                 SupplierName = Convert.ToString(row["SupplierName"]);
-                StockSellingPrice = Convert.ToInt32(row["StockSellingPrice"]);
-                StockQuantity = Convert.ToInt32(row["StockQuantity"]);
                 DateAdded = Convert.ToDateTime(row["DateAdded"]);
+                StockSellingPrice = Convert.ToInt32(Convert.ToDecimal(row["StockSellingPrice"]));
+                StockQuantity = Convert.ToInt32(row["StockQuantity"]);
                 Active = Convert.ToBoolean(row["Active"]);
                 return true;
             }
@@ -46,10 +45,12 @@ namespace ClassLibrary
             if (string.IsNullOrWhiteSpace(supplierName) || supplierName.Length > 50)
                 error += "SupplierName invalid; ";
 
-            if (!int.TryParse(stockSellingPrice, out int price) || price < 1 || price > 100000)
+            int price;
+            if (!int.TryParse(stockSellingPrice, out price) || price < 1 || price > 100000)
                 error += "StockSellingPrice invalid; ";
 
-            if (!int.TryParse(stockQuantity, out int qty) || qty < 0 || qty > 100000)
+            int qty;
+            if (!int.TryParse(stockQuantity, out qty) || qty < 0 || qty > 100000)
                 error += "StockQuantity invalid; ";
 
             return error;
@@ -58,13 +59,14 @@ namespace ClassLibrary
         // ------- Override Equals (for Assert.AreEqual in tests) -------
         public override bool Equals(object obj)
         {
-            if (obj is clsStock other)
+            if (obj is clsArchivedStock other)
             {
                 return StockId == other.StockId &&
                        StockName == other.StockName &&
                        SupplierName == other.SupplierName &&
                        StockSellingPrice == other.StockSellingPrice &&
                        StockQuantity == other.StockQuantity &&
+                       DateAdded == other.DateAdded &&
                        Active == other.Active;
             }
             return false;
