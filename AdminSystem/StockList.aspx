@@ -3,150 +3,152 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Stock List</title>
+    <title>Inventory — Stock List</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
     <style>
+        :root{
+            --ink:#0f172a;
+            --panel:#111827;
+            --panel-2:#1f2937;
+            --line:#2d3748;
+            --muted:#9ca3af;
+            --brand:#14b8a6;
+            --brand-2:#0ea5a4;
+            --danger:#ef4444;
+            --card:#0b1220;
+            --shadow:0 10px 30px rgba(0,0,0,.35);
+        }
         body {
-            padding-top: 50px;
-            background-color: lightsteelblue;
-            background-image: url('4.jpg');
-            background-size: cover;
-            background-position: center;
+            background: radial-gradient(1000px 600px at 10% -10%, #0b2447 0%, #000 40%) fixed,
+                        radial-gradient(800px 400px at 110% 10%, #051937 0%, #000 50%) fixed,
+                        #000;
+            color: #e5e7eb;
         }
-        .container-custom {
-            max-width: 950px;
-            background-color: rgba(105,105,105, 0.9);
-            border-radius: 10px;
-            padding: 50px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        .app-header {
+            background: linear-gradient(180deg, rgba(20,20,28,.85), rgba(20,20,28,.75));
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--line);
         }
-        .form-select {
-            height: 300px;
-            font-size: 1rem;
-            border: 2px solid #007bff;
-            border-radius: 10px;
-            background-color: #f1f1f1;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+        .shell { max-width: 1200px; }
+        .panel {
+            background: linear-gradient(180deg, rgba(17,24,39,.9), rgba(17,24,39,.85));
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
         }
-        .form-select:hover {
-            transform: scale(1.05);
-            background-color: #e2e2e2;
-            border-color: #0056b3;
+        .panel-heading {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            display: flex; align-items:center; gap:10px;
+            background: linear-gradient(180deg, rgba(31,41,55,.7), rgba(31,41,55,.4));
+            border-top-left-radius: 14px; border-top-right-radius: 14px;
         }
-        .btn:hover {
-            transform: scale(1.05);
-            transition: all 0.3s ease;
+        .panel-body { padding: 18px; }
+        .sidebar .btn { width: 100%; padding: 10px 14px; border-radius: 10px; }
+        .btn-brand { background: var(--brand); border-color: var(--brand); color: #001b1a; font-weight: 600; }
+        .btn-brand:hover { background: var(--brand-2); border-color: var(--brand-2); color:#001b1a; }
+        .btn-ghost { background: transparent; border: 1px solid var(--line); color: #e5e7eb; }
+        .btn-ghost:hover { background: #0f172a; border-color: #384151; }
+        .btn-danger-soft { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.35); color: #fecaca; }
+        .btn-danger-soft:hover { background: rgba(239,68,68,.22); border-color: rgba(239,68,68,.55); }
+        .search-wrap {
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 12px;
         }
-        .btn-light-grey {
-            background-color: #d3d3d3;
-            border-color: #d3d3d3;
-            color: #000;
+        .search-wrap input[type="text"]{ background: transparent !important; border: 0 !important; color: #e5e7eb; }
+        .hint { color: var(--muted); font-size: .92rem; }
+        select.form-select, .form-select {
+            height: 480px;
+            background: var(--card);
+            color: #e5e7eb;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            font-size: 0.98rem;
         }
-        .btn-light-grey:hover {
-            background-color: #a9a9a9;
-            border-color: #a9a9a9;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .button-container .btn { width: 30%; }
-        .transparent-textbox {
-            background-color: transparent;
-            border: 1px solid #ccc;
-            color: #000;
-            font-size: 1rem;
-        }
-        .transparent-textbox:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-        .error-message {
-            color: red;
-            font-weight: bold;
-        }
-        .footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            font-size: 0.875rem;
-            margin-top: 40px;
-        }
-        .footer a { color: #b0c4de; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
+        .form-select option { padding: 10px; }
+        .error-message { color: #fca5a5; font-weight: 600; }
+        .sp-16 { height:16px; } .sp-24 { height:24px; }
+        @media (max-width: 991.98px) { .stack-md { flex-direction: column; } }
     </style>
 </head>
 <body>
-
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="StockEntry.aspx">Add Stock</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="StockList.aspx">Stock List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="TeamMainMenu.aspx">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
     <form id="form1" runat="server">
-        <div class="container container-custom mt-4">
-
-            <asp:Label ID="lblStockList" runat="server" Text="Stock List" CssClass="h4 text-center mb-3 text-white"></asp:Label>
-            <asp:ListBox ID="lstStockList" runat="server" CssClass="form-select mb-3" Size="10" style="width:100%;"></asp:ListBox>
-
-            <div class="button-container mb-4">
-                <asp:Button ID="btnAdd" runat="server" Text="Add" CssClass="btn btn-light-grey" OnClick="btnAdd_Click" />
-                <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger" OnClick="btnDelete_Click" />
-                <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-light-grey" OnClick="btnEdit_Click" />
-            </div>
-
-            <div class="row align-items-center mb-3">
-                <div class="col-auto">
-                    <asp:Label ID="lblFilter" runat="server" Text="Enter Stock Name" CssClass="form-label text-white"></asp:Label>
+        <!-- Header -->
+        <header class="app-header sticky-top">
+            <div class="container shell d-flex align-items-center justify-content-between py-3">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-box-seam" style="font-size:1.35rem;color:var(--brand)"></i>
+                    <asp:Label ID="lblStockList" runat="server" Text="Inventory — Stock List" CssClass="h5 m-0"></asp:Label>
                 </div>
-                <div class="col-auto">
-                    <asp:TextBox ID="txtFilterStock" runat="server" CssClass="form-control transparent-textbox" Width="250px"></asp:TextBox>
-                </div>
-                <div class="col-auto">
-                    <asp:Button ID="btnApplyFilter" runat="server" Text="Apply Filter" CssClass="btn btn-light-grey" OnClick="btnApplyFilter_Click" />
-                    <asp:Button ID="btnFind" runat="server" Text="Find" CssClass="btn btn-light-grey" OnClick="btnFind_Click" />
-                </div>
-                <div class="col-auto">
-                    <asp:Button ID="btnClearFilter" runat="server" Text="Clear Filter" CssClass="btn btn-secondary" OnClick="btnClearFilter_Click" />
+                <div class="d-flex align-items-center gap-2">
+                    <asp:Button ID="btnLogout" runat="server" Text="Return to Main Menu" CssClass="btn btn-ghost" OnClick="btnLogout_Click" />
                 </div>
             </div>
+        </header>
 
-            <asp:Label ID="lblError" runat="server" Text="" CssClass="error-message"></asp:Label>
+        <!-- Main Shell -->
+        <div class="container shell my-4">
+            <div class="row g-4 stack-md">
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="panel sidebar">
+                        <div class="panel-heading">
+                            <i class="bi bi-sliders"></i>
+                            <span class="fw-semibold">Actions &amp; Filter</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="search-wrap mb-3">
+                                <i class="bi bi-search"></i>
+                                <asp:TextBox ID="txtFilterStock" runat="server" CssClass="form-control" placeholder="Search by supplier name or keyword"></asp:TextBox>
+                            </div>
 
-            <div class="text-center mt-4">
-                <asp:Button ID="btnLogout" runat="server" Text="Return To Main Menu" CssClass="btn btn-outline-dark" OnClick="btnLogout_Click" />
+                            <div class="d-flex gap-2 flex-wrap">
+                                <asp:Button ID="btnFind" runat="server" Text="Find" CssClass="btn btn-ghost" OnClick="btnFind_Click" />
+                                <asp:Button ID="btnClearFilter" runat="server" Text="Clear" CssClass="btn btn-ghost" OnClick="btnClearFilter_Click" />
+                            </div>
+
+                            <div class="sp-24"></div>
+                            <div class="d-grid gap-2">
+                                <asp:Button ID="btnAdd" runat="server" Text="Add New Stock" CssClass="btn btn-brand" OnClick="btnAdd_Click" />
+                                <asp:Button ID="btnEdit" runat="server" Text="Edit Selected" CssClass="btn btn-ghost" OnClick="btnEdit_Click" />
+                                <asp:Button ID="btnDelete" runat="server" Text="Delete Selected" CssClass="btn btn-danger-soft" OnClick="btnDelete_Click" />
+                            </div>
+
+                            <div class="sp-16"></div>
+                            <asp:Label ID="lblError" runat="server" Text="" CssClass="error-message"></asp:Label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main: Stock List -->
+                <div class="col-lg-8">
+                    <div class="panel h-100">
+                        <div class="panel-heading">
+                            <i class="bi bi-collection"></i>
+                            <span class="fw-semibold">Inventory</span>
+                            <span class="ms-auto text-secondary small">Select an item to Edit/Delete</span>
+                        </div>
+                        <div class="panel-body">
+                            <asp:ListBox ID="lstStockList" runat="server" CssClass="form-select w-100" Size="14"></asp:ListBox>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="footer">
-            &copy; 2025 Golden Hour Watch Store. All rights reserved.
-            <br />
-            <a href="PrivacyPolicy.aspx">Privacy Policy</a> |
-            <a href="TermsOfService.aspx">Terms of Service</a>
+            <div class="text-center mt-4 small text-secondary">
+                &copy; 2025 Stock Management System — All rights reserved.
+            </div>
         </div>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

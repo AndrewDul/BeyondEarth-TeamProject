@@ -11,10 +11,7 @@ namespace ClassLibrary
 
         public clsStockCollection()
         {
-            // Load all rows
-            var DB = new clsDataConnection();
-            DB.Execute("sproc_tblStock_SelectAll");
-            PopulateArray(DB);
+            RefreshAll();
         }
 
         public int Add()
@@ -26,10 +23,8 @@ namespace ClassLibrary
             DB.AddParameter("@StockQuantity", ThisStock.StockQuantity);
             DB.AddParameter("@Active", ThisStock.Active);
 
-            // Execute returns new PK (proc must RETURN SCOPE_IDENTITY())
             int newId = DB.Execute("sproc_tblStock_Insert");
             ThisStock.StockId = newId;
-
             RefreshAll();
             return newId;
         }
@@ -56,13 +51,21 @@ namespace ClassLibrary
             RefreshAll();
         }
 
-        public void ReportBySupplierName(string supplierName)
+        public void ReportByStockName(string StockName)
         {
             var DB = new clsDataConnection();
-            DB.AddParameter("@SupplierName", supplierName ?? string.Empty);
-            DB.Execute("sproc_tblStock_FilterBySupplierName");
+            DB.AddParameter("@StockName", StockName ?? string.Empty);
+            DB.Execute("sproc_tblStock_FilterByStockName");
             PopulateArray(DB);
         }
+
+        // Add inside ClassLibrary.clsStockCollection
+        public void ReportBySupplierName(string supplierOrName)
+        {
+        // Backward compatible alias if other pages still call this
+         ReportByStockName(supplierOrName);
+        }
+
 
         private void PopulateArray(clsDataConnection DB)
         {

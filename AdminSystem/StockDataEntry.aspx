@@ -3,111 +3,164 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Stock Data Entry</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Stock — Data Entry</title>
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
     <style>
-        body {
-            background-color: grey;
-            background-image: url('4.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
+        :root{
+            --ink:#0f172a; --panel:#111827; --panel-2:#1f2937; --line:#2d3748;
+            --muted:#9ca3af; --brand:#14b8a6; --brand-2:#0ea5a4; --danger:#ef4444;
+            --card:#0b1220; --shadow:0 10px 30px rgba(0,0,0,.35);
         }
-        .container {
-            max-width: 700px;
-            background-color: dimgray;
-            border-radius: 10px;
-            padding: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-top: 20px;
+        html,body{height:100%;}
+        body{
+            background: radial-gradient(1000px 600px at 10% -10%, #0b2447 0%, #000 40%) fixed,
+                        radial-gradient(800px 400px at 110% 10%, #051937 0%, #000 50%) fixed,
+                        #000; color:#e5e7eb;
         }
-        .btn:hover { transform: scale(1.05); transition: 0.3s; }
+        .app-header{
+            background: linear-gradient(180deg, rgba(20,20,28,.85), rgba(20,20,28,.75));
+            border-bottom:1px solid var(--line); backdrop-filter: blur(6px);
+        }
+        .shell{ max-width: 1100px; }
+
+        .panel{
+            background: linear-gradient(180deg, rgba(17,24,39,.92), rgba(17,24,39,.86));
+            border:1px solid var(--line); border-radius:16px; box-shadow: var(--shadow);
+        }
+        .panel-heading{
+            padding:16px 18px; border-bottom:1px solid var(--line);
+            display:flex; align-items:center; gap:10px;
+            background: linear-gradient(180deg, rgba(31,41,55,.7), rgba(31,41,55,.4));
+            border-top-left-radius:16px; border-top-right-radius:16px;
+        }
+        .panel-body{ padding:22px; }
+
+        .field-card{
+            background: var(--panel-2);
+            border:1px solid var(--line);
+            border-radius:12px;
+            padding:14px 14px 10px 14px;
+        }
+        .form-control, .form-check-input{
+            background:#0b1220; color:#e5e7eb; border:1px solid var(--line);
+        }
+        .form-control::placeholder{ color:#94a3b8; }
+        .form-label{ color:#cbd5e1; }
+
+        .btn-brand{ background:var(--brand); border-color:var(--brand); color:#001b1a; font-weight:600; }
+        .btn-brand:hover{ background:var(--brand-2); border-color:var(--brand-2); color:#001b1a; }
+        .btn-ghost{ background:transparent; border:1px solid var(--line); color:#e5e7eb; }
+        .btn-ghost:hover{ background:#0f172a; border-color:#384151; }
+        .btn-danger-soft{ background: rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.35); color:#fecaca; }
+        .btn-danger-soft:hover{ background: rgba(239,68,68,.22); border-color: rgba(239,68,68,.55); }
+
+        .error-message{ color:#fca5a5; font-weight:600; }
+        .muted{ color:var(--muted); }
+        .sp-12{height:12px;} .sp-16{height:16px;} .sp-24{height:24px;}
+
+        @media (max-width: 991.98px){
+            .stack-md{flex-direction:column;}
+        }
     </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        &nbsp;<div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="StockDataEntry.aspx">Add Stock</a></li>
-                <li class="nav-item"><a class="nav-link" href="StockList.aspx">Stock List</a></li>
-                <li class="nav-item"><a class="nav-link" href="TeamMainMenu.aspx">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<form id="form1" runat="server">
-    <div class="container mt-4">
-
-        <!-- Stock ID -->
-        <div class="row mb-3 align-items-center">
-            <asp:Label ID="lblStockID" runat="server" Text="Stock ID" CssClass="col-sm-2 col-form-label"></asp:Label>
-            <div class="col-sm-3">
-                <asp:TextBox ID="txtStockID" runat="server" CssClass="form-control"></asp:TextBox>
+    <form id="form1" runat="server">
+        <!-- Header -->
+        <header class="app-header sticky-top">
+            <div class="container shell d-flex align-items-center justify-content-between py-3">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-box-seam" style="font-size:1.35rem;color:var(--brand)"></i>
+                    <span class="h5 m-0">Stock — Data Entry</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="StockList.aspx" class="btn btn-ghost"><i class="bi bi-list-ul"></i> Stock List</a>
+                    <a href="TeamMainMenu.aspx" class="btn btn-ghost"><i class="bi bi-door-open"></i> Main Menu</a>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <asp:Button ID="btnFind" runat="server" Text="Find" CssClass="btn btn-primary" OnClick="btnFind_Click"/>
-            </div>
-        </div>
+        </header>
 
-        <!-- Stock Name -->
-        <div class="row mb-3">
-            <asp:Label ID="lblName" runat="server" Text="Stock Name" CssClass="col-sm-2 col-form-label"></asp:Label>
-            <div class="col-sm-5">
-                <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
-            </div>
-        </div>
+        <!-- Content -->
+        <div class="container shell my-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="fw-semibold">Enter / Edit Stock Details</span>
+                </div>
+                <div class="panel-body">
+                    <!-- Stock ID & Find -->
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label for="txtStockID" class="form-label">Stock ID</label>
+                            <asp:TextBox ID="txtStockID" runat="server" CssClass="form-control" placeholder="e.g., 101"></asp:TextBox>
+                        </div>
+                        <div class="col-md-2 d-grid">
+                            <label class="form-label">&nbsp;</label>
+                            <asp:Button ID="btnFind" runat="server" Text="Find" CssClass="btn btn-ghost" OnClick="btnFind_Click" />
+                        </div>
+                        <div class="col-md-7">
+                            <div class="muted small">Tip: Use <em>Find</em> to load an existing stock record by ID.</div>
+                        </div>
+                    </div>
 
-        <!-- Supplier Name -->
-        <div class="row mb-3">
-            <asp:Label ID="lblSupplier" runat="server" Text="Supplier Name" CssClass="col-sm-2 col-form-label"></asp:Label>
-            <div class="col-sm-5">
-                <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control"></asp:TextBox>
-            </div>
-        </div>
+                    <div class="sp-24"></div>
 
-        <!-- Selling Price -->
-        <div class="row mb-3">
-            <asp:Label ID="lblPrice" runat="server" Text="Selling Price" CssClass="col-sm-2 col-form-label"></asp:Label>
-            <div class="col-sm-5">
-                <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control"></asp:TextBox>
-            </div>
-        </div>
+                    <!-- Two-column form -->
+                    <div class="row g-4 stack-md">
+                        <div class="col-lg-6">
+                            <div class="field-card">
+                                <label for="txtName" class="form-label">Stock Name</label>
+                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Product name"></asp:TextBox>
+                            </div>
+                            <div class="sp-16"></div>
+                            <div class="field-card">
+                                <label for="txtSupplierName" class="form-label">Supplier Name</label>
+                                <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control" placeholder="Supplier"></asp:TextBox>
+                            </div>
+                        </div>
 
-        <!-- Quantity -->
-        <div class="row mb-3">
-            <asp:Label ID="lblQty" runat="server" Text="Quantity" CssClass="col-sm-2 col-form-label"></asp:Label>
-            <div class="col-sm-5">
-                <asp:TextBox ID="txtQuantity" runat="server" CssClass="form-control"></asp:TextBox>
-            </div>
-        </div>
+                        <div class="col-lg-6">
+                            <div class="field-card">
+                                <label for="txtPrice" class="form-label">Selling Price</label>
+                                <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" placeholder="e.g., 199.99"></asp:TextBox>
+                            </div>
+                            <div class="sp-16"></div>
+                            <div class="field-card">
+                                <label for="txtQuantity" class="form-label">Quantity</label>
+                                <asp:TextBox ID="txtQuantity" runat="server" CssClass="form-control" placeholder="e.g., 25"></asp:TextBox>
+                            </div>
+                            <div class="sp-16"></div>
+                            <div class="form-check">
+                                <asp:CheckBox ID="chkActive" runat="server" CssClass="form-check-input" />
+                                <asp:Label ID="lblActive" runat="server" AssociatedControlID="chkActive" Text="Active" CssClass="form-check-label"></asp:Label>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Active -->
-        <div class="row mb-3">
-            <div class="offset-sm-2 col-sm-5 form-check">
-                <asp:CheckBox ID="chkActive" runat="server" CssClass="form-check-input" />
-                <asp:Label ID="lblActive" runat="server" AssociatedControlID="chkActive" Text="Active" CssClass="form-check-label"></asp:Label>
-            </div>
-        </div>
+                    <div class="sp-24"></div>
 
-        <!-- Buttons -->
-        <div class="mb-3 row">
-            <div class="offset-sm-2 col-sm-5">
-                <asp:Button ID="btnOK" runat="server" Text="OK" CssClass="btn btn-success me-2" OnClick="btnOK_Click" />
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click" />
-            </div>
-        </div>
+                    <!-- Actions -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <asp:Button ID="btnOK" runat="server" Text="Save" CssClass="btn btn-brand px-4" OnClick="btnOK_Click" />
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-ghost px-4" OnClick="btnCancel_Click" />
+                        <span class="ms-auto"></span>
+                    </div>
 
-        <!-- Error label -->
-        <div class="row mb-3">
-            <div class="offset-sm-2 col-sm-5">
-                <asp:Label ID="lblError" runat="server" ForeColor="Red" CssClass="fw-bold"></asp:Label>
+                    <div class="sp-16"></div>
+                    <!-- Error -->
+                    <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
+                </div>
+            </div>
+
+            <div class="text-center mt-3 small text-secondary">
+                &copy; 2025 Stock Management System — All rights reserved.
             </div>
         </div>
-    </div>
-</form>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
