@@ -23,7 +23,7 @@ public partial class StockList : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         Session["StockId"] = -1;    // so we can add new stock
-        Response.Redirect("StockEntry.aspx");
+        Response.Redirect("StockDataEntry.aspx");
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ public partial class StockList : System.Web.UI.Page
         {
             int StockId = Convert.ToInt32(lstStockList.SelectedValue);
             Session["StockId"] = StockId;
-            Response.Redirect("StockEntry.aspx");
+            Response.Redirect("StockDataEntry.aspx");
         }
         else
         {
@@ -57,7 +57,7 @@ public partial class StockList : System.Web.UI.Page
     protected void btnApplyFilter_Click(object sender, EventArgs e)
     {
         clsStockCollection FilteredStocks = new clsStockCollection();
-        FilteredStocks.ReportBySupplierName(txtFilterStock.Text);
+        FilteredStocks.ReportByStockName(txtFilterStock.Text);
         lstStockList.DataSource = FilteredStocks.StockList;
         lstStockList.DataValueField = "StockId";
         lstStockList.DataTextField = "StockName";
@@ -74,7 +74,7 @@ public partial class StockList : System.Web.UI.Page
     protected void btnFind_Click(object sender, EventArgs e)
     {
         clsStockCollection FilteredStocks = new clsStockCollection();
-        FilteredStocks.ReportBySupplierName(txtFilterStock.Text);
+        FilteredStocks.ReportByStockName(txtFilterStock.Text);
         lstStockList.DataSource = FilteredStocks.StockList;
         lstStockList.DataValueField = "StockId";
         lstStockList.DataTextField = "StockName";

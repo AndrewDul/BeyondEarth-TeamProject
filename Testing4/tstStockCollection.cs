@@ -152,6 +152,8 @@ namespace Testing4
         }
 
         // ******************* ReportBySupplierName Method ******************* //
+        
+
         [TestMethod]
         public void ReportBySupplierNameMethodOK()
         {
@@ -161,6 +163,8 @@ namespace Testing4
             FilteredStocks.ReportBySupplierName("");
             Assert.AreEqual(AllStocks.Count, FilteredStocks.Count);
         }
+
+
 
         [TestMethod]
         public void ReportBySupplierNameNoneFound()

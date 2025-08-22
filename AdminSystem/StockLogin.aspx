@@ -1,120 +1,86 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StockLogin.aspx.cs" Inherits="StockLogin" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Golden Hour Login Page</title>
+    <title>Stock Management — Login</title>
 
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
     <style>
-        /* General Body Styling */
-        body {
-            padding-top: 50px;
-            background-color: #f4f6f9;
-            background-image: url('3.jpg'); /* Add your background image here */
-            background-size: cover;
-            background-position: center;
+        :root{
+            --ink:#0f172a; --panel:#111827; --panel-2:#1f2937; --line:#2d3748;
+            --muted:#9ca3af; --brand:#14b8a6; --brand-2:#0ea5a4;
         }
-
-        /* Centering the form container */
-        .container {
-            max-width: 400px;
-            background-color: dimgray; /* Slightly transparent background */
-            border-radius: 10px;
-            padding: 50px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        body{
+            height:100vh; display:flex; align-items:center; justify-content:center;
+            background: radial-gradient(1000px 600px at 10% -10%, #0b2447 0%, #000 40%) fixed,
+                        radial-gradient(800px 400px at 110% 10%, #051937 0%, #000 50%) fixed,
+                        #000; color:#e5e7eb;
         }
-
-        /* Hover effect for buttons */
-        .btn:hover {
-            transform: scale(1.05);
-            transition: all 0.3s ease;
+        .login-card{
+            background: linear-gradient(180deg, rgba(17,24,39,.95), rgba(17,24,39,.88));
+            border:1px solid var(--line);
+            border-radius:16px;
+            padding:40px 32px;
+            width:100%; max-width:420px;
+            box-shadow:0 10px 30px rgba(0,0,0,.5);
         }
-
-        /* Styling for focused input fields */
-        .form-control:focus {
-            border-color: #d4af37; /* Gold color */
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        .login-card h3{ font-weight:600; color:#fff; }
+        .form-label{ color:#cbd5e1; font-weight:500; }
+        .form-control{
+            background:#0b1220; border:1px solid var(--line); color:#e5e7eb;
         }
+        .form-control::placeholder{ color:#94a3b8; }
+        .form-control:focus{ border-color:var(--brand); box-shadow:0 0 0 0.2rem rgba(20,184,166,.35); }
 
-        /* Adding subtle animation on form submission */
-        .form-label {
-            font-weight: 600;
-        }
+        .btn-brand{ background:var(--brand); border-color:var(--brand); color:#001b1a; font-weight:600; }
+        .btn-brand:hover{ background:var(--brand-2); border-color:var(--brand-2); color:#001b1a; }
+        .btn-ghost{ background:transparent; border:1px solid var(--line); color:#e5e7eb; }
+        .btn-ghost:hover{ background:#0f172a; border-color:#384151; }
 
-        /* Styling error message */
-        .error-message {
-            font-size: 0.875rem;
-            color: red;
-            font-weight: bold;
-        }
-
-        /* Styling hover effects on buttons */
-        .btn-primary {
-            background-color: #000;
-            border-color: #000;
-        }
-
-        .btn-primary:hover {
-            background-color: #d4af37; /* Gold color */
-            border-color: #d4af37;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #5a6268;
+        .error-message{ color:#fca5a5; font-weight:600; font-size:.9rem; }
+        .icon-circle{
+            width:60px; height:60px; border-radius:50%;
+            display:grid; place-items:center;
+            margin:0 auto 18px auto;
+            background:rgba(20,184,166,.12);
+            border:1px solid rgba(20,184,166,.35);
+            color:var(--brand); font-size:28px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="login-card text-center">
+            <div class="icon-circle"><i class="bi bi-box-seam"></i></div>
+            <h3 class="mb-4">Stock System Login</h3>
 
-        <!-- Main container for centering content -->
-        <div class="container">
-           <center> </center>
-
-            <!-- Page title (Centered) -->
-            <h3 class="text-center mb-4">
-                &nbsp;</h3>
-
-            <!-- Username input field -->
-            <div class="mb-3">
+            <!-- Username -->
+            <div class="mb-3 text-start">
                 <asp:Label ID="lblUserName" runat="server" Text="Username" AssociatedControlID="txtUserName" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" placeholder="Enter your username"></asp:TextBox>
             </div>
 
-            <!-- Password input field -->
-            <div class="mb-3">
+            <!-- Password -->
+            <div class="mb-3 text-start">
                 <asp:Label ID="lblPassword" runat="server" Text="Password" AssociatedControlID="txtPassword" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
             </div>
 
-            <!-- Error message container -->
-            <div class="mb-3">
-                <asp:Label ID="lblErrorLogin" runat="server" CssClass="error-message"></asp:Label>
-            </div>
+            <!-- Error -->
+            <asp:Label ID="lblErrorLogin" runat="server" CssClass="error-message d-block mb-3"></asp:Label>
 
-            <!-- Login and Cancel buttons -->
-            <div class="d-flex justify-content-center gap-3">
-                <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login" CssClass="btn btn-primary w-100" />
+            <!-- Buttons -->
+            <div class="d-grid gap-2">
+                <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-brand" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-ghost" OnClick="btnCancel_Click" />
             </div>
-            <div class="d-flex justify-content-center mt-2">
-                <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" CssClass="btn btn-secondary w-100" />
-            </div>
-
         </div>
-
-        <!-- Bootstrap JS Bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
